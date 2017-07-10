@@ -1,0 +1,47 @@
+// AIzaSyC1oQ-_PvhbjXfPyDuk3GKD15IjAlu4iGM
+
+// content_copy
+//
+
+*{
+  box-sizing: border-box;
+  // color: green;
+}
+
+.grid-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .row{
+    &:before,
+    &:after {
+      content : " ";
+      display : table;
+      clear: both;
+    }
+
+    [class*='col-'] {
+      float: left;
+      min-height: 1px;
+      // height: 100%;
+      // background: yellowgreen;
+      // padding: 12px;
+    }
+
+    $colsNumber: 12;
+
+    @for $i from 1 through $colsNumber{
+      .col-#{$i}{
+        width: 100% / $colsNumber * $i;
+      }
+    }
+
+    @media (max-width: 550px) {
+      [class*='col-'] {
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+}

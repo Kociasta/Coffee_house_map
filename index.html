@@ -2,58 +2,72 @@
 <html lang="pl-PL">
 <head>
     <meta charset="UTF-8">
+    <!-- To ensure proper rendering and touch zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Coffee house map - Warsaw</title>
     <!-- fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|Lobster&amp;subset=latin-ext" rel="stylesheet">
 </head>
 
 <body>
-
-  <header>
-    <div class = "logo"></div>
-    <div class="title">Mapa Warszawskich kawiarni</div>
-    <nav> Nawigcja po stornie </nav>
-  </header>
-
-  <section class="filters">
-    <div>tu będzie można wybierać opcje</div>
-  </section>
-
-  <section clsss="content"> <!-- here showed tag articles with img and short desc -->
-    <div class="articles">
-      <article>
-        <div> zdjęcie </div>
-        <div> Kawiarnia 1 </div>
-        <div> ul. Adres 1 </div>
-      </article>
-      <article>
-        <div> zdjęcie </div>
-        <div> Kawiarnia 1 </div>
-        <div> ul. Adres 1 </div>
-      </article>
-      <article>
-        <div> zdjęcie </div>
-        <div> Kawiarnia 1 </div>
-        <div> ul. Adres 1 </div>
-      </article>
+  <div class="grid-container">
+    <div class="row">
+      <header class="col-12">
+        <div class="title col-4">Mapa Warszawskich kawiarni</div>
+        <div class = "logo col-2"></div>
+        <nav calss="col-6">  </nav>
+      </header>
     </div>
-    <div class="map">
-      <div> to jest załadowana mapa </div>
+    <div class="row">
+      <section class="filters col-12" >
+        <label> gdzie ta kawa ? <label>
+        <input id="where" value="" placeholder="podaj adres"/>
+        <label> o której? <label>
+        <input placeholder="teraz"/>
+        <button id="find">Szukaj</button>
+      </section>
     </div>
-  </section>
-
-  <footer>
-    <div class="title small">Mapa Warszawskich kawiarni</div>
-    <div class="copy">Copyright 2017 by Kociasta</div>
-    <div class="media">
-      <!-- icons - fb , Kociasta , github  -->
-      <a href="#" target="_blank"><img src="./img/fb_ico.png"></a>
-      <a href="http://www.kociasta.pl" target="_blank"><img src="./img/kociasta_ico.png"></a>
-      <a href="https://github.com/Kociasta/Coffee_house_map" target="_blank"><img src="./img/git_ico.png"></a>
+    <div class="row">
+      <section clsss="content col-12"> <!-- here showed tag articles with img and short desc -->
+        <div class="articles col-3">
+          <article class="row">
+            <div class="hidden" > zdjęcie </div>
+            <div class="cafe-name"> Kawiarnia 1 </div>
+            <div> ul. Adres 1 </div>
+          </article>
+          <article class="row">
+            <div class="hidden"> zdjęcie </div>
+            <div class="cafe-name"> Kawiarnia 2 </div>
+            <div> ul. Adres 1 </div>
+          </article>
+          <article class="row">
+            <div class="hidden"> zdjęcie </div>
+            <div class="cafe-name"> Kawiarnia 3 </div>
+            <div> ul. Adres 1 </div>
+          </article>
+          <article class="row">
+            <div class="hidden"> zdjęcie </div>
+            <div class="cafe-name"> Kawiarnia 4 </div>
+            <div> ul. Adres 1 </div>
+          </article>
+        </div>
+        <div class="col-9">
+          <div id="map"></div>
+        </div>
+      </section>
     </div>
-  </footer>
-
-
+    <div class="row">
+      <footer class=" col-12">
+        <div class="copy col-4">Copyright 2017 by Kociasta</div>
+        <div class="media col-4">
+          <a href="#" target="_blank" class="col-4"><img src="./img/fb_ico.png"></a>
+          <a href="http://www.kociasta.pl" target="_blank" class="col-4"><img src="./img/kociasta_ico.png"></a>
+          <a href="https://github.com/Kociasta/Coffee_house_map" target="_blank" class="col-4"><img src="./img/git_ico.png"></a>
+        </div>
+        <div class="title small col-4">Mapa Warszawskich kawiarni</div>
+      </footer>
+    </div>
+  </div>
 
   <!-- loading JQUERY -->
   <script
@@ -62,5 +76,7 @@
     crossorigin="anonymous"></script>
     <!-- loading my js and scss -->
   <script src="js/out.js"></script>
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYDAQpbxOhU7n07Tc_flZ8XxtzsyF-lm0&callback=initMap"
+type="text/javascript"></script> -->
 </body>
 </html>
