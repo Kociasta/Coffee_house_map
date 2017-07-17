@@ -1,46 +1,45 @@
 // file with all code / logics
-import * as Firebase from 'firebase';
+
+import * as Firebase from 'firebase'; // my coffee places with detail info
 import './../css/style.scss';
 
 
-$(()=>{
+$(()=>{ // DOM Content Loaded
 
-  var buttonFind = $('#find');
+  let buttonFind = $('#find');
+  let mapId = $('#map')[0]; // jQuery: return Object - I have to pull out div elem
 
   // making map
   function initMap() {
-        var relax = {lat: 52.2331846, lng: 21.0109556}; //e.g. point - Cafe Relax
-        var map = new google.maps.Map(document.getElementById('map'), { //create a new map elem in #map in HTML
-          zoom: 12,
-          center: relax
+        let centrum = {lat:  52.229676 , lng: 21.012229}; //my focus on start point
+        let map = new google.maps.Map( mapId, { //create new map elem in #map
+          zoom: 13,
+          center: centrum
         });
 
         // geocoding obj
         var geocoder = new google.maps.Geocoder();
 
-        // event dla buttonFind - dodawanie markera z szukaną lokalizacją
-        buttonFind.on("click" , (event) => {
-          // console.log($('#where').val());
-          geocodeAddress(geocoder , map);
-        });
-
         // function converting address
-        function geocodeAddress(geocoder, resultsMap) {
-          var address = $('#where').val()+",Warszawa";
-          // var address = "belwederska 12 , warszawa";
-          geocoder.geocode({'address': address}, function(results, status) {
+        function geocodeAddress(geocoder, map2) {
+          var myAddress = $('#where').val() + ",Warszawa" ; // get street from input and add Warsaw to address
+          geocoder.geocode({'address': myAddress}, function(results, status) {
             if (status === 'OK') {
-              resultsMap.setCenter(results[0].geometry.location);
-              var marker2 = new google.maps.Marker({
-                  map: resultsMap,
-                  position: results[0].geometry.location
-              });
-
-            } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+                map2.setCenter(results[0].geometry.location);
+                var marker2 = new google.maps.Marker({
+                    map: map2,
+                    position: results[0].geometry.location
+                });
+            }else {
+                alert('Geocode was not successful for the following reason: ' + status);
             }
           });
         }
+
+        // event dla buttonFind - dodawanie markera z szukaną lokalizacją
+        buttonFind.on("click" , (event) => {
+          geocodeAddress(geocoder , map); // decoding address from input + marker
+        });
   };
 
   // set key and initialize map

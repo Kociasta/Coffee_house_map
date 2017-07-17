@@ -3492,36 +3492,32 @@ __webpack_require__(59);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // file with all code / logics
+
 $(function () {
+  // DOM Content Loaded
 
   var buttonFind = $('#find');
+  var mapId = $('#map')[0]; // jQuery: return Object - I have to pull out div elem
 
   // making map
   function initMap() {
-    var relax = { lat: 52.2331846, lng: 21.0109556 }; //e.g. point - Cafe Relax
-    var map = new google.maps.Map(document.getElementById('map'), { //create a new map elem in #map in HTML
-      zoom: 12,
-      center: relax
+    var centrum = { lat: 52.229676, lng: 21.012229 }; //my focus on start point
+    var map = new google.maps.Map(mapId, { //create new map elem in #map
+      zoom: 13,
+      center: centrum
     });
 
     // geocoding obj
     var geocoder = new google.maps.Geocoder();
 
-    // event dla buttonFind - dodawanie markera z szukaną lokalizacją
-    buttonFind.on("click", function (event) {
-      // console.log($('#where').val());
-      geocodeAddress(geocoder, map);
-    });
-
     // function converting address
-    function geocodeAddress(geocoder, resultsMap) {
-      var address = $('#where').val() + ",Warszawa";
-      // var address = "belwederska 12 , warszawa";
-      geocoder.geocode({ 'address': address }, function (results, status) {
+    function geocodeAddress(geocoder, map2) {
+      var myAddress = $('#where').val() + ",Warszawa"; // get street from input and add Warsaw to address
+      geocoder.geocode({ 'address': myAddress }, function (results, status) {
         if (status === 'OK') {
-          resultsMap.setCenter(results[0].geometry.location);
+          map2.setCenter(results[0].geometry.location);
           var marker2 = new google.maps.Marker({
-            map: resultsMap,
+            map: map2,
             position: results[0].geometry.location
           });
         } else {
@@ -3529,6 +3525,11 @@ $(function () {
         }
       });
     }
+
+    // event dla buttonFind - dodawanie markera z szukaną lokalizacją
+    buttonFind.on("click", function (event) {
+      geocodeAddress(geocoder, map); // decoding address from input + marker
+    });
   };
 
   // set key and initialize map
@@ -3558,7 +3559,7 @@ $(function () {
       $(elem).next().text("ul. " + snap.val()[i].adress);
     });
   });
-});
+}); // my coffee places with detail info
 
 /***/ }),
 /* 28 */
@@ -8979,7 +8980,7 @@ exports = module.exports = __webpack_require__(61)(undefined);
 
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.grid-container {\n  width: 100%;\n  max-width: 1200px;\n  margin: 0 auto; }\n  .grid-container .row:before, .grid-container .row:after {\n    content: \" \";\n    display: table;\n    clear: both; }\n  .grid-container .row [class*='col-'] {\n    float: left;\n    min-height: 1px; }\n  .grid-container .row .col-1 {\n    width: 8.33333%; }\n  .grid-container .row .col-2 {\n    width: 16.66667%; }\n  .grid-container .row .col-3 {\n    width: 25%; }\n  .grid-container .row .col-4 {\n    width: 33.33333%; }\n  .grid-container .row .col-5 {\n    width: 41.66667%; }\n  .grid-container .row .col-6 {\n    width: 50%; }\n  .grid-container .row .col-7 {\n    width: 58.33333%; }\n  .grid-container .row .col-8 {\n    width: 66.66667%; }\n  .grid-container .row .col-9 {\n    width: 75%; }\n  .grid-container .row .col-10 {\n    width: 83.33333%; }\n  .grid-container .row .col-11 {\n    width: 91.66667%; }\n  .grid-container .row .col-12 {\n    width: 100%; }\n  @media (max-width: 550px) {\n    .grid-container .row [class*='col-'] {\n      float: none;\n      width: 100%; } }\n\n* {\n  font-family: 'Comfortaa', cursive;\n  margin-top: 2px;\n  padding: 2px; }\n\n.hidden {\n  display: none; }\n\nheader {\n  border: 1px solid #ffccdd;\n  padding: 5px; }\n\n.title {\n  font-size: 30px;\n  font-family: 'Lobster', cursive; }\n\n.filters {\n  padding: 5px;\n  border: 1px solid #ffccdd; }\n\n#map {\n  border: 1px solid #ffccdd;\n  width: 100%;\n  height: 350px; }\n\n.articles {\n  border: 1px solid #ffccdd;\n  height: 350px; }\n\narticle {\n  height: 25%;\n  border: 1px solid #ffccdd;\n  padding-top: 15px; }\n\nimg {\n  width: 40px;\n  height: 40px; }\n\n.small {\n  text-align: right;\n  padding-top: 20px;\n  font-size: 18px; }\n\n.copy {\n  padding-top: 20px;\n  font-size: 14px; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box; }\n\n.grid-container {\n  width: 100%;\n  max-width: 1200px;\n  margin: 0 auto; }\n  .grid-container .row:before, .grid-container .row:after {\n    content: \" \";\n    display: table;\n    clear: both; }\n  .grid-container .row [class*='col-'] {\n    float: left;\n    min-height: 1px; }\n  .grid-container .row .col-1 {\n    width: 8.33333%; }\n  .grid-container .row .col-2 {\n    width: 16.66667%; }\n  .grid-container .row .col-3 {\n    width: 25%; }\n  .grid-container .row .col-4 {\n    width: 33.33333%; }\n  .grid-container .row .col-5 {\n    width: 41.66667%; }\n  .grid-container .row .col-6 {\n    width: 50%; }\n  .grid-container .row .col-7 {\n    width: 58.33333%; }\n  .grid-container .row .col-8 {\n    width: 66.66667%; }\n  .grid-container .row .col-9 {\n    width: 75%; }\n  .grid-container .row .col-10 {\n    width: 83.33333%; }\n  .grid-container .row .col-11 {\n    width: 91.66667%; }\n  .grid-container .row .col-12 {\n    width: 100%; }\n  @media (max-width: 550px) {\n    .grid-container .row [class*='col-'] {\n      float: none;\n      width: 100%; } }\n\n* {\n  font-family: 'Comfortaa', cursive;\n  margin-top: 2px;\n  padding: 2px; }\n\n.hidden {\n  display: none; }\n\nheader {\n  border: 1px solid #ffccdd;\n  padding: 5px; }\n\n.title {\n  font-size: 30px;\n  font-family: 'Lobster', cursive; }\n\n.filters {\n  padding: 5px;\n  border: 1px solid #ffccdd; }\n\n#when {\n  width: 300px; }\n\n#map {\n  border: 1px solid #ffccdd;\n  width: 100%;\n  height: 350px; }\n\n.articles {\n  border: 1px solid #ffccdd;\n  height: 350px; }\n\narticle {\n  height: 25%;\n  border: 1px solid #ffccdd;\n  padding-top: 15px; }\n\nimg {\n  width: 40px;\n  height: 40px; }\n\n.small {\n  text-align: right;\n  padding-top: 20px;\n  font-size: 18px; }\n\n.copy {\n  padding-top: 20px;\n  font-size: 14px; }\n", ""]);
 
 // exports
 
