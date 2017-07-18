@@ -12,6 +12,7 @@ $(()=>{ // DOM Content Loaded
   let map;
   let geocoder;
 
+
   // variable with config data to get to Firebase
   let config = {
       apiKey: "AIzaSyA0PL06i_Fdi70FkUxOo4I9JToVS-632U8",
@@ -22,6 +23,9 @@ $(()=>{ // DOM Content Loaded
       messagingSenderId: "58575921422"
     };
 
+
+  let coffeeAddress;
+  let coffeeAddresses = [];
   // getting info from database
   let fb = Firebase.initializeApp(config);
   let db = fb.database().ref();
@@ -33,7 +37,19 @@ $(()=>{ // DOM Content Loaded
       // set adresses from firebase (to the next elems)
       $(elem).next().text("ul. " + snap.val()[i].adress);
     });
+    // set coffeeAddress on one of the firebase cafes address
+    coffeeAddress = snap.val()[2].adress;
+    for(let i=0 ; i<snap.val().length ; i++ ){
+      coffeeAddresses.push(snap.val()[i].adress);
+    };
+
+
+    console.log("in",coffeeAddresses);
   });
+
+  console.log("out",coffeeAddresses);
+
+
 
   // making map
   function initMap() {
@@ -62,9 +78,7 @@ $(()=>{ // DOM Content Loaded
     });
   }
 
-  // get street from firebase and add Warsaw to address
-  let coffeeAddress;
-  db.on('value' , (snap) => {  coffeeAddress = snap.val()[2].adress});
+
 
   //function seting cafes from firebase
   function geocodeCafes(geocoder, map2, coffeeAddress) {
@@ -84,6 +98,8 @@ $(()=>{ // DOM Content Loaded
   $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBYDAQpbxOhU7n07Tc_flZ8XxtzsyF-lm0")
     .done(function(data) {
 
+        initMap();
+
         // event for buttonFind - add markers after set input address
         buttonFind.on("click" , (event) => {
           geocodeAddress(geocoder , map); // decoding address from input + marker
@@ -98,7 +114,6 @@ $(()=>{ // DOM Content Loaded
           }
         });
 
-        initMap();
     });
 
 
