@@ -3501,7 +3501,6 @@ $(function () {
   // initialize variables
   var map = void 0;
   var geocoder = void 0;
-
   // variable with config data to get to Firebase
   var config = {
     apiKey: "AIzaSyA0PL06i_Fdi70FkUxOo4I9JToVS-632U8",
@@ -3513,7 +3512,7 @@ $(function () {
   };
 
   var coffeeAddress = void 0;
-  var coffeeAddresses = [];
+  // let coffeeAddresses = [];
   // getting info from database
   var fb = Firebase.initializeApp(config);
   var db = fb.database().ref();
@@ -3527,15 +3526,13 @@ $(function () {
     });
     // set coffeeAddress on one of the firebase cafes address
     coffeeAddress = snap.val()[2].adress;
-    for (var i = 0; i < snap.val().length; i++) {
-      coffeeAddresses.push(snap.val()[i].adress);
-    };
-
-    console.log("in", coffeeAddresses);
+    // for(let i=0 ; i<snap.val().length ; i++ ){
+    //   coffeeAddresses.push(snap.val()[i].adress);
+    // };
   });
 
-  console.log("out", coffeeAddresses);
-
+  var myAddressLatLng;
+  var CafeAddressLatLng;
   // making map
   function initMap() {
     var centrum = { lat: 52.229676, lng: 21.012229 }; //my focus on start point
@@ -3557,6 +3554,7 @@ $(function () {
           map: map2,
           position: results[0].geometry.location
         });
+        myAddressLatLng = results[0].geometry.location;
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
@@ -3571,15 +3569,22 @@ $(function () {
           map: map2,
           position: results[0].geometry.location
         });
+        CafeAddressLatLng = results[0].geometry.location;
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
   }
 
-  // events and  map initialization
-  $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBYDAQpbxOhU7n07Tc_flZ8XxtzsyF-lm0").done(function (data) {
+  // function calculating a distance between myAddress and CafeAddress
+  function takeDistance(from, to) {
+    // parameters are google.maps.LatLng objects
+    var distance = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+    return Math.round(distance * 0.1) / 100; // return distance in km with 2 decimal places
+  }
 
+  // events and  map initialization
+  $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBYDAQpbxOhU7n07Tc_flZ8XxtzsyF-lm0&libraries=geometry").then(function (data) {
     initMap();
 
     // event for buttonFind - add markers after set input address
@@ -3593,6 +3598,7 @@ $(function () {
       if (event.keyCode == enter) {
         geocodeAddress(geocoder, map); // decoding address from input + marker
         geocodeCafes(geocoder, map, coffeeAddress); // decoding address from firebase + marker
+        console.log(takeDistance(myAddressLatLng, CafeAddressLatLng));
       }
     });
   });
