@@ -40,11 +40,19 @@ import moduleGeocodeMyAddress from './geocodeMyAddress.js';
       });
 
       function onGeocoded(resultLatLng) {
-        // distance = moduleDistance.takeDistance(resultLatLng , moduleFirebase.coffeeAddress());
-        // console.log(distance);
-        // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is object made of lat() and lng()
-        console.log(moduleFirebase.coffeeAddress());
 
+        // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is 2 elem array which contains 2 objects (1. made of lat() and lng() and 2. made of name and adress)
+
+        let allCafes = moduleFirebase.coffeeAddress();
+
+        // let tabToCompare = [];
+        allCafes.forEach((elem, i ) => {
+          // tabToCompare.push(moduleDistance.takeDistance(resultLatLng , elem[0]));
+          allCafes[i].push(moduleDistance.takeDistance(resultLatLng , elem[0]));
+        });
+
+        allCafes.sort(function(a, b){return a[2]-b[2]}); // sort order - 3rd elem - distance 
+        console.log(allCafes);
       }
     }
 

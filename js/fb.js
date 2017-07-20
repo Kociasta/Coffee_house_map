@@ -43,15 +43,19 @@ let moduleFirebase = (function() {
       _db.on('value' , (snap) => {
 
           for(let i=0 ; i<snap.val().length ; i++){
-              param.push( {
+              param.push( [{
                             lat: function(){ return snap.val()[i].geo.lat},
                             lng: function(){ return snap.val()[i].geo.lng},
-                          }
+                          },
+                          {
+                            name: function(){ return snap.val()[i].name},
+                            adress: function(){ return snap.val()[i].adress}
+                          }]
               )
           }
 
       });
-      return param
+      return param // structure: [ [{lat() , lng()},{name() , adress()}] , [{},{}] , [{},{}] , ...  ] - if I want get to adress -> moduleFirebase.coffeeAddress()[1][1].adress()
     };
 
 

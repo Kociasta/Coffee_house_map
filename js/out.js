@@ -11659,8 +11659,20 @@ var second = function () {
             onGeocoded = function onGeocoded(resultLatLng) {
               // distance = moduleDistance.takeDistance(resultLatLng , moduleFirebase.coffeeAddress());
               // console.log(distance);
-              // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is object made of lat() and lng()
-              console.log(_fb2.default.coffeeAddress());
+              // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is 2 elem array which contains 2 objects (1. made of lat() and lng() and 2. made of name and adress)
+              // console.log(moduleFirebase.coffeeAddress());
+              var all = _fb2.default.coffeeAddress();
+
+              // let tabToCompare = [];
+              all.forEach(function (elem, i) {
+                // tabToCompare.push(moduleDistance.takeDistance(resultLatLng , elem[0]));
+                all[i].push(_distance2.default.takeDistance(resultLatLng, elem[0]));
+              });
+
+              all.sort(function (a, b) {
+                return a[2] - b[2];
+              });
+              console.log(all);
             };
 
             _context2.next = 3;
@@ -17737,21 +17749,28 @@ var moduleFirebase = function () {
   var _coffeeAddress = function _coffeeAddress() {
     _db.on('value', function (snap) {
       var _loop = function _loop(i) {
-        param.push({
+        param.push([{
           lat: function lat() {
             return snap.val()[i].geo.lat;
           },
           lng: function lng() {
             return snap.val()[i].geo.lng;
           }
-        });
+        }, {
+          name: function name() {
+            return snap.val()[i].name;
+          },
+          adress: function adress() {
+            return snap.val()[i].adress;
+          }
+        }]);
       };
 
       for (var i = 0; i < snap.val().length; i++) {
         _loop(i);
       }
     });
-    return param;
+    return param; // structure: [ [{lat() , lng()},{name() , adress()}] , [{},{}] , [{},{}] , ...  ] - if I want get to adress -> moduleFirebase.coffeeAddress()[1][1].adress()
   };
 
   return {
@@ -17780,7 +17799,7 @@ var moduleDistance = function () {
   var _takeDistance = function _takeDistance(from, to) {
     // parameters are google.maps.LatLng objects
     var distance = google.maps.geometry.spherical.computeDistanceBetween(from, to);
-    return distance / 1000; // return distance in km with 2 decimal places
+    return Math.round(distance * 0.1) / 100; // return distance in km with 2 decimal places
   };
 
   return {
