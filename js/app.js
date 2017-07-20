@@ -6,6 +6,7 @@ import moduleFirebase from './fb.js';
 import moduleDistance from './distance.js';
 import moduleInitMap from './initMap.js';
 import moduleGeocodeMyAddress from './geocodeMyAddress.js';
+import modulesortCafes from './sortCafes.js';
 
     const enter = 13;
     // catching HTML elements
@@ -40,18 +41,16 @@ import moduleGeocodeMyAddress from './geocodeMyAddress.js';
       });
 
       function onGeocoded(resultLatLng) {
-
         // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is 2 elem array which contains 2 objects (1. made of lat() and lng() and 2. made of name and adress)
+        let allCafes = modulesortCafes.allCafes(resultLatLng);
 
-        let allCafes = moduleFirebase.coffeeAddress();
-
-        // let tabToCompare = [];
-        allCafes.forEach((elem, i ) => {
-          // tabToCompare.push(moduleDistance.takeDistance(resultLatLng , elem[0]));
-          allCafes[i].push(moduleDistance.takeDistance(resultLatLng , elem[0]));
-        });
-
-        allCafes.sort(function(a, b){return a[2]-b[2]}); // sort order - 3rd elem - distance 
+        // let allCafes = moduleFirebase.coffeeAddress();
+        //
+        // allCafes.forEach((elem, i ) => {
+        //   allCafes[i].push(moduleDistance.takeDistance(resultLatLng , elem[0]));
+        // });
+        //
+        // allCafes.sort(function(a, b){return a[2]-b[2]}); // sort order - 3rd elem - distance
         console.log(allCafes);
       }
     }

@@ -11657,22 +11657,17 @@ var second = function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             onGeocoded = function onGeocoded(resultLatLng) {
-              // distance = moduleDistance.takeDistance(resultLatLng , moduleFirebase.coffeeAddress());
-              // console.log(distance);
               // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is 2 elem array which contains 2 objects (1. made of lat() and lng() and 2. made of name and adress)
-              // console.log(moduleFirebase.coffeeAddress());
-              var all = _fb2.default.coffeeAddress();
+              var allCafes = _sortCafes2.default.allCafes(resultLatLng);
 
-              // let tabToCompare = [];
-              all.forEach(function (elem, i) {
-                // tabToCompare.push(moduleDistance.takeDistance(resultLatLng , elem[0]));
-                all[i].push(_distance2.default.takeDistance(resultLatLng, elem[0]));
-              });
-
-              all.sort(function (a, b) {
-                return a[2] - b[2];
-              });
-              console.log(all);
+              // let allCafes = moduleFirebase.coffeeAddress();
+              //
+              // allCafes.forEach((elem, i ) => {
+              //   allCafes[i].push(moduleDistance.takeDistance(resultLatLng , elem[0]));
+              // });
+              //
+              // allCafes.sort(function(a, b){return a[2]-b[2]}); // sort order - 3rd elem - distance
+              console.log(allCafes);
             };
 
             _context2.next = 3;
@@ -11743,6 +11738,10 @@ var _initMap2 = _interopRequireDefault(_initMap);
 var _geocodeMyAddress = __webpack_require__(364);
 
 var _geocodeMyAddress2 = _interopRequireDefault(_geocodeMyAddress);
+
+var _sortCafes = __webpack_require__(365);
+
+var _sortCafes2 = _interopRequireDefault(_sortCafes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17892,6 +17891,51 @@ exports.default = moduleGeocodeMyAddress;
 // --------------how to use ?
 // import import moduleGeocodeMyAddress from './geocodeMyAddress.js';
 // moduleGeocodeMyAddress.myAddressLatLng(geocoder , map , address)
+
+/***/ }),
+/* 365 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _distance = __webpack_require__(362);
+
+var _distance2 = _interopRequireDefault(_distance);
+
+var _fb = __webpack_require__(361);
+
+var _fb2 = _interopRequireDefault(_fb);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var modulesortCafes = function (resultLatLng) {
+
+  var _allCafes = _fb2.default.coffeeAddress();
+
+  var takeAllCafes = function takeAllCafes(resultLatLng) {
+
+    _allCafes.forEach(function (elem, i) {
+      _allCafes[i].push(_distance2.default.takeDistance(resultLatLng, elem[0]));
+    });
+
+    _allCafes.sort(function (a, b) {
+      return a[2] - b[2];
+    }); // sort order - 3rd elem - distance
+
+    return _allCafes;
+  };
+
+  return {
+    allCafes: takeAllCafes
+  };
+}();
+
+exports.default = modulesortCafes;
 
 /***/ })
 /******/ ]);
