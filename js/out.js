@@ -6764,24 +6764,22 @@ var moduleFirebase = function () {
   var _fb = Firebase.initializeApp(_config);
   var _db = _fb.database().ref();
 
-  // set text to name from firebase
+  // set text to name from firebase set adresses from firebase (to the next elems)
   var _setName = function _setName() {
     _db.on('value', function (snap) {
 
+      var _random = Math.round(Math.random() * (snap.val().length - 4));
+
       $(".cafe-name").each(function (i, elem) {
         // find elements with class cafe-name
-        $(elem).text(snap.val()[i].name);
+        $(elem).text(snap.val()[_random + i].name);
+        // console.log(_random);
       });
-    });
-  };
-
-  // set adresses from firebase (to the next elems)
-  var _setAddress = function _setAddress() {
-    _db.on('value', function (snap) {
 
       $(".cafe-name").each(function (i, elem) {
         // find elements with class cafe-name
-        $(elem).next().text("ul. " + snap.val()[i].adress);
+        $(elem).next().text("ul. " + snap.val()[_random + i].adress);
+        // console.log(_random);
       });
     });
   };
@@ -6816,7 +6814,6 @@ var moduleFirebase = function () {
 
   return {
     setName: _setName,
-    setAddress: _setAddress,
     coffeeAddress: _coffeeAddress
   };
 }();
@@ -11758,10 +11755,9 @@ var first = function () {
             map = _initMap2.default.map();
             geocoder = _initMap2.default.geocoder();
 
-            _fb2.default.setName();
-            _fb2.default.setAddress();
+            _fb2.default.setName(); // set name of Cafe and address
 
-          case 7:
+          case 6:
           case 'end':
             return _context.stop();
         }
@@ -11801,7 +11797,7 @@ var second = function () {
             $('html').on("keyup", function (event) {
               // event on Enter up
               if (event.keyCode == enter) {
-                allCafes = null;
+                allCafes = null; // it could not be here
                 _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
                 // clearing input value
                 $('#where').val(" ");
@@ -11883,14 +11879,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 var enter = 13;
-// catching HTML elements
-var buttonFind = $('#find');
+
 // initialize variables
 var map = void 0;
 var geocoder = void 0;
-var x = void 0;
-var distance = 0;
-var adresFromFB = void 0;
 
 start();
 

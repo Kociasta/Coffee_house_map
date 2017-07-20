@@ -10,14 +10,10 @@ import moduleSortCafes from './sortCafes.js';
 import moduleSetNameSetAddress from './setNamesetAddress.js';
 
     const enter = 13;
-    // catching HTML elements
-    let buttonFind = $('#find');
+
     // initialize variables
     let map ;
     let geocoder;
-    let x;
-    let distance = 0;
-    let adresFromFB;
 
 
     async function first() {
@@ -27,8 +23,7 @@ import moduleSetNameSetAddress from './setNamesetAddress.js';
       map = moduleInitMap.map();
       geocoder = moduleInitMap.geocoder();
 
-      moduleFirebase.setName();
-      moduleFirebase.setAddress();
+      moduleFirebase.setName(); // set name of Cafe and address
 
     }
 
@@ -39,7 +34,7 @@ import moduleSetNameSetAddress from './setNamesetAddress.js';
 
       $('html').on("keyup" , (event) => { // event on Enter up
         if(event.keyCode == enter){
-          allCafes = null;
+          allCafes = null; // it could not be here
           moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
           // clearing input value
           $('#where').val(" ") ;

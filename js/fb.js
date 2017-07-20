@@ -16,23 +16,20 @@ let moduleFirebase = (function() {
     let _fb = Firebase.initializeApp(_config);
     let _db = _fb.database().ref();
 
-    // set text to name from firebase
+    // set text to name from firebase set adresses from firebase (to the next elems)
     let _setName = function() {
       _db.on('value' , (snap) => {
 
+        let _random = Math.round(Math.random()*(snap.val().length-4));
+
         $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
-            $(elem).text(snap.val()[i].name);
+            $(elem).text(snap.val()[_random+i].name);
+            // console.log(_random);
         });
 
-      });
-    };
-
-     // set adresses from firebase (to the next elems)
-    let _setAddress = function() {
-      _db.on('value' , (snap) => {
-
         $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
-          $(elem).next().text("ul. " + snap.val()[i].adress);
+          $(elem).next().text("ul. " + snap.val()[_random+i].adress);
+          // console.log(_random);
         });
 
       });
@@ -61,7 +58,6 @@ let moduleFirebase = (function() {
 
     return {
       setName: _setName,
-      setAddress: _setAddress,
       coffeeAddress: _coffeeAddress,
     }
 
