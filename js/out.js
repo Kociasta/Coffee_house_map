@@ -11784,7 +11784,6 @@ var second = function () {
             onGeocoded = function onGeocoded(resultLatLng) {
               // sorting data in distance order
               allCafes = _sortCafes2.default.allCafes(resultLatLng);
-              console.log(allCafes);
               // setting Name i Address in HTML (nearest)
               _setNamesetAddress2.default.set(allCafes);
               allCafes.forEach(function (elem, i) {
@@ -11804,6 +11803,8 @@ var second = function () {
               if (event.keyCode == enter) {
                 allCafes = null;
                 _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
+                // clearing input value
+                $('#where').val(" ");
               }
             });
 

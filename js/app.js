@@ -41,14 +41,14 @@ import moduleSetNameSetAddress from './setNamesetAddress.js';
         if(event.keyCode == enter){
           allCafes = null;
           moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
-
+          // clearing input value
+          $('#where').val(" ") ;
         }
       });
 
       function onGeocoded(resultLatLng) {
         // sorting data in distance order
         allCafes = moduleSortCafes.allCafes(resultLatLng);
-        console.log(allCafes);
         // setting Name i Address in HTML (nearest)
         moduleSetNameSetAddress.set(allCafes);
         allCafes.forEach((elem , i) => {
