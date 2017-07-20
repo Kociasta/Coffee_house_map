@@ -35,17 +35,26 @@ import moduleSetNameSetAddress from './setNamesetAddress.js';
     async function second() {
       await first();
 
+      let allCafes;
+
       $('html').on("keyup" , (event) => { // event on Enter up
         if(event.keyCode == enter){
+          allCafes = null;
           moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
+
         }
       });
 
       function onGeocoded(resultLatLng) {
         // sorting data in distance order
-        let allCafes = moduleSortCafes.allCafes(resultLatLng);
+        allCafes = moduleSortCafes.allCafes(resultLatLng);
+        console.log(allCafes);
         // setting Name i Address in HTML (nearest)
-        moduleSetNameSetAddress.nearest(allCafes);
+        moduleSetNameSetAddress.set(allCafes);
+        allCafes.forEach((elem , i) => {
+            elem.splice(-1,1);
+        });
+
 
       }
     }

@@ -1,6 +1,6 @@
 let moduleSetNameSetAddress = (function(allCafes) {
 
-  let abc = function(allCafes){
+  let setNameAndAddress = function(allCafes){
 
     $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
         $(elem).text(allCafes[i][1].name);
@@ -11,9 +11,8 @@ let moduleSetNameSetAddress = (function(allCafes) {
 
   }
 
-
   return {
-    nearest: abc
+    set: setNameAndAddress
   }
 
 })();

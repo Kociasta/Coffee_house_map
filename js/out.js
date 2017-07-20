@@ -11776,31 +11776,38 @@ var first = function () {
 
 var second = function () {
   var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var onGeocoded;
+    var allCafes, onGeocoded;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             onGeocoded = function onGeocoded(resultLatLng) {
               // sorting data in distance order
-              var allCafes = _sortCafes2.default.allCafes(resultLatLng);
+              allCafes = _sortCafes2.default.allCafes(resultLatLng);
+              console.log(allCafes);
               // setting Name i Address in HTML (nearest)
-              _setNamesetAddress2.default.nearest(allCafes);
+              _setNamesetAddress2.default.set(allCafes);
+              allCafes.forEach(function (elem, i) {
+                elem.splice(-1, 1);
+              });
             };
 
             _context2.next = 3;
             return first();
 
           case 3:
+            allCafes = void 0;
+
 
             $('html').on("keyup", function (event) {
               // event on Enter up
               if (event.keyCode == enter) {
+                allCafes = null;
                 _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
               }
             });
 
-          case 4:
+          case 5:
           case 'end':
             return _context2.stop();
         }
@@ -17946,7 +17953,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var moduleSetNameSetAddress = function (allCafes) {
 
-  var abc = function abc(allCafes) {
+  var setNameAndAddress = function setNameAndAddress(allCafes) {
 
     $(".cafe-name").each(function (i, elem) {
       // find elements with class cafe-name
@@ -17959,7 +17966,7 @@ var moduleSetNameSetAddress = function (allCafes) {
   };
 
   return {
-    nearest: abc
+    set: setNameAndAddress
   };
 }();
 
