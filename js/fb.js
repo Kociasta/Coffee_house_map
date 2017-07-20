@@ -1,7 +1,7 @@
 import * as Firebase from 'firebase'; // my coffee places with detail info
 let moduleFirebase = (function() {
 
-    let param;
+    let param = [];
     // variable with config data to get to Firebase
     const _config = {
         apiKey: "AIzaSyA0PL06i_Fdi70FkUxOo4I9JToVS-632U8",
@@ -41,10 +41,13 @@ let moduleFirebase = (function() {
     // set coffeeAddress on one of the firebase cafes address
     let _coffeeAddress =  function() {
       _db.on('value' , (snap) => {
-          // console.log(snap.val()[2].geo[0]);
-          param = {
-            lat: function(){ return snap.val()[2].geo.lat},
-            lng: function(){ return snap.val()[2].geo.lng},
+
+          for(let i=0 ; i<snap.val().length ; i++){
+              param.push( {
+                            lat: function(){ return snap.val()[i].geo.lat},
+                            lng: function(){ return snap.val()[i].geo.lng},
+                          }
+              )
           }
 
       });

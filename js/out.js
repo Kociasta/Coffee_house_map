@@ -11657,12 +11657,10 @@ var second = function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             onGeocoded = function onGeocoded(resultLatLng) {
-              console.log(resultLatLng.lat(), "my address");
-              console.log(_fb2.default.coffeeAddress().lat(), "coffee address");
-
-              result = _distance2.default.takeDistance(resultLatLng, _fb2.default.coffeeAddress());
-              console.log(result);
-              // console.log(moduleFirebase.coffeeAddress());
+              // distance = moduleDistance.takeDistance(resultLatLng , moduleFirebase.coffeeAddress());
+              // console.log(distance);
+              // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is object made of lat() and lng()
+              console.log(_fb2.default.coffeeAddress());
             };
 
             _context2.next = 3;
@@ -11673,7 +11671,6 @@ var second = function () {
             $('html').on("keyup", function (event) {
               // event on Enter up
               if (event.keyCode == enter) {
-
                 _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
               }
             });
@@ -11751,7 +11748,7 @@ var buttonFind = $('#find');
 var map = void 0;
 var geocoder = void 0;
 var x = void 0;
-var result = 0;
+var distance = 0;
 var adresFromFB = void 0;
 
 start();
@@ -17699,7 +17696,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // my coffee places with detail info
 var moduleFirebase = function () {
 
-  var param = void 0;
+  var param = [];
   // variable with config data to get to Firebase
   var _config = {
     apiKey: "AIzaSyA0PL06i_Fdi70FkUxOo4I9JToVS-632U8",
@@ -17739,15 +17736,20 @@ var moduleFirebase = function () {
   // set coffeeAddress on one of the firebase cafes address
   var _coffeeAddress = function _coffeeAddress() {
     _db.on('value', function (snap) {
-      // console.log(snap.val()[2].geo[0]);
-      param = {
-        lat: function lat() {
-          return snap.val()[2].geo.lat;
-        },
-        lng: function lng() {
-          return snap.val()[2].geo.lng;
-        }
+      var _loop = function _loop(i) {
+        param.push({
+          lat: function lat() {
+            return snap.val()[i].geo.lat;
+          },
+          lng: function lng() {
+            return snap.val()[i].geo.lng;
+          }
+        });
       };
+
+      for (var i = 0; i < snap.val().length; i++) {
+        _loop(i);
+      }
     });
     return param;
   };

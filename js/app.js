@@ -14,7 +14,7 @@ import moduleGeocodeMyAddress from './geocodeMyAddress.js';
     let map ;
     let geocoder;
     let x;
-    let result = 0;
+    let distance = 0;
     let adresFromFB;
 
 
@@ -35,18 +35,16 @@ import moduleGeocodeMyAddress from './geocodeMyAddress.js';
 
       $('html').on("keyup" , (event) => { // event on Enter up
         if(event.keyCode == enter){
-
           moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
         }
       });
 
       function onGeocoded(resultLatLng) {
-        console.log(resultLatLng.lat() , "my address");
-        console.log(moduleFirebase.coffeeAddress().lat() , "coffee address");
+        // distance = moduleDistance.takeDistance(resultLatLng , moduleFirebase.coffeeAddress());
+        // console.log(distance);
+        // moduleFirebase.coffeeAddress() - this is an array of all cafes - each element is object made of lat() and lng()
+        console.log(moduleFirebase.coffeeAddress());
 
-        result = moduleDistance.takeDistance(resultLatLng , moduleFirebase.coffeeAddress());
-        console.log(result);
-        // console.log(moduleFirebase.coffeeAddress());
       }
     }
 
