@@ -11,7 +11,6 @@ let moduleInitMap = (function() {
       center: centrum
     });
     _geocoder = new google.maps.Geocoder() ;
-    // console.log(_geocoder , _map);
   };
 
   let makeMap = function() {

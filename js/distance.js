@@ -4,7 +4,7 @@ let moduleDistance = (function() {
   // function calculating a distance between myAddress and CafeAddress
   let _takeDistance = function(from, to) { // parameters are google.maps.LatLng objects
     let distance = google.maps.geometry.spherical.computeDistanceBetween(from, to);
-    return distance // return distance in km with 2 decimal places
+    return (distance/1000) // return distance in km with 2 decimal places
   }
 
   return {

@@ -3,10 +3,8 @@ let moduleGeocodeMyAddress = (
 
     let _myAddressLatLng;
 
-    // let myAddress = $('#where').val() + ",Warszawa" ; // get street from input and add Warsaw to address
-
     let _geocodeAddress =  function(geocoder , map , address , callback) {
-        geocoder.geocode({'address': address}, function(results, status) {
+        geocoder.geocode({'address': `${address} , Warszawa`}, function(results, status) {
           if (status === 'OK') {
 
             _myAddressLatLng = results[0].geometry.location;
@@ -18,7 +16,6 @@ let moduleGeocodeMyAddress = (
 
         });
     }
-
 
     return {
       geocodeAddress:  _geocodeAddress, // I take lat and lng of my address

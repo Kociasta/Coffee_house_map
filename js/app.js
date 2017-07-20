@@ -15,10 +15,8 @@ import moduleGeocodeMyAddress from './geocodeMyAddress.js';
     let geocoder;
     let x;
     let result = 0;
-    let adres = {
-      lat: function(){ return 52.21414124},
-      lng: function(){return 12.23423423},
-    }
+    let adresFromFB;
+
 
     async function first() {
       await $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBYDAQpbxOhU7n07Tc_flZ8XxtzsyF-lm0&libraries=geometry");
@@ -26,6 +24,7 @@ import moduleGeocodeMyAddress from './geocodeMyAddress.js';
       moduleInitMap.initMap();
       map = moduleInitMap.map();
       geocoder = moduleInitMap.geocoder();
+
       moduleFirebase.setName();
       moduleFirebase.setAddress();
 
@@ -38,19 +37,22 @@ import moduleGeocodeMyAddress from './geocodeMyAddress.js';
         if(event.keyCode == enter){
 
           moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
-
         }
       });
 
       function onGeocoded(resultLatLng) {
-        // console.log(resultLatLng);
-        result = moduleDistance.takeDistance(resultLatLng , adres);
+        console.log(resultLatLng.lat() , "my address");
+        console.log(moduleFirebase.coffeeAddress().lat() , "coffee address");
+
+        result = moduleDistance.takeDistance(resultLatLng , moduleFirebase.coffeeAddress());
         console.log(result);
+        // console.log(moduleFirebase.coffeeAddress());
       }
     }
 
     async function start() {
       await second();
+
     }
 
     start()
