@@ -8,6 +8,8 @@ import moduleInitMap from './initMap.js';
 import moduleGeocodeMyAddress from './geocodeMyAddress.js';
 import moduleSortCafes from './sortCafes.js';
 import moduleSetNameSetAddress from './setNamesetAddress.js';
+import moduleMyMarker from './myMarker.js';
+
 
     const enter = 13;
 
@@ -31,21 +33,32 @@ import moduleSetNameSetAddress from './setNamesetAddress.js';
       await first();
 
       let allCafes;
-
+      let markersMy = [];
       $('html').on("keyup" , (event) => { // event on Enter up
         if(event.keyCode == enter){
           allCafes = null; // it could not be here
           moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
           // clearing input value
           $('#where').val(" ") ;
+          if(markersMy[0]){ markersMy[0].setMap(null);}
+          markersMy.splice(0,1);
         }
       });
 
       function onGeocoded(resultLatLng) {
+        // place here MARKER of my position
+        let myPositionMarker = moduleMyMarker.setMyMarker(resultLatLng , map);
+        markersMy.push(myPositionMarker);
+        console.log(markersMy);
         // sorting data in distance order
         allCafes = moduleSortCafes.allCafes(resultLatLng);
         // setting Name i Address in HTML (nearest)
         moduleSetNameSetAddress.set(allCafes);
+
+        // place here MARKERS of Cafes
+
+
+        //delete last elem of each cafe - which is counted distance
         allCafes.forEach((elem , i) => {
             elem.splice(-1,1);
         });

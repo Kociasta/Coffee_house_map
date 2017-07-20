@@ -11772,16 +11772,25 @@ var first = function () {
 
 var second = function () {
   var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var allCafes, onGeocoded;
+    var allCafes, markersMy, onGeocoded;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             onGeocoded = function onGeocoded(resultLatLng) {
+              // place here MARKER of my position
+              var myPositionMarker = _myMarker2.default.setMyMarker(resultLatLng, map);
+              markersMy.push(myPositionMarker);
+              console.log(markersMy);
               // sorting data in distance order
               allCafes = _sortCafes2.default.allCafes(resultLatLng);
               // setting Name i Address in HTML (nearest)
               _setNamesetAddress2.default.set(allCafes);
+
+              // place here MARKERS of Cafes
+
+
+              //delete last elem of each cafe - which is counted distance
               allCafes.forEach(function (elem, i) {
                 elem.splice(-1, 1);
               });
@@ -11792,7 +11801,7 @@ var second = function () {
 
           case 3:
             allCafes = void 0;
-
+            markersMy = [];
 
             $('html').on("keyup", function (event) {
               // event on Enter up
@@ -11801,10 +11810,14 @@ var second = function () {
                 _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
                 // clearing input value
                 $('#where').val(" ");
+                if (markersMy[0]) {
+                  markersMy[0].setMap(null);
+                }
+                markersMy.splice(0, 1);
               }
             });
 
-          case 5:
+          case 6:
           case 'end':
             return _context2.stop();
         }
@@ -11868,6 +11881,10 @@ var _sortCafes2 = _interopRequireDefault(_sortCafes);
 var _setNamesetAddress = __webpack_require__(366);
 
 var _setNamesetAddress2 = _interopRequireDefault(_setNamesetAddress);
+
+var _myMarker = __webpack_require__(367);
+
+var _myMarker2 = _interopRequireDefault(_myMarker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17964,6 +17981,36 @@ var moduleSetNameSetAddress = function (allCafes) {
 }();
 
 exports.default = moduleSetNameSetAddress;
+
+/***/ }),
+/* 367 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var moduleMyMarker = function () {
+
+  var _setMyMarker = function _setMyMarker(latLng, map) {
+    map.setCenter(latLng);
+    var marker = new google.maps.Marker({
+      map: map,
+      position: latLng
+    });
+
+    return marker;
+  };
+
+  return {
+    setMyMarker: _setMyMarker
+  };
+}();
+
+exports.default = moduleMyMarker;
 
 /***/ })
 /******/ ]);
