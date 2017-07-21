@@ -18014,6 +18014,7 @@ var moduleMyMarker = function () {
     var marker = new google.maps.Marker({
       map: map,
       position: latLng,
+
       icon: {
         path: google.maps.SymbolPath.CIRCLE,
         scale: 6
@@ -18047,7 +18048,9 @@ var moduleCafeMarker = function () {
 
     var marker = new google.maps.Marker({
       map: map,
-      position: { lat: latLng.lat(), lng: latLng.lng() }
+      position: { lat: latLng.lat(), lng: latLng.lng() },
+      // icon: 'img/kociasta_ico.png',
+      animation: google.maps.Animation.DROP
     });
 
     return marker;
