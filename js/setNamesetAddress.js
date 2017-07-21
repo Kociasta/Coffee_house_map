@@ -9,6 +9,7 @@ let moduleSetNameSetAddress = (function(allCafes) {
         $(elem).next().text(allCafes[i][1].adress);
     });
 
+
   }
 
   return {

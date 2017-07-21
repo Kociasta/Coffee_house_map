@@ -11782,13 +11782,16 @@ var second = function () {
               var myPositionMarker = _myMarker2.default.setMyMarker(resultLatLng, map);
               markersMy.push(myPositionMarker);
               console.log(markersMy);
+
               // sorting data in distance order
               allCafes = _sortCafes2.default.allCafes(resultLatLng);
               // setting Name i Address in HTML (nearest)
               _setNamesetAddress2.default.set(allCafes);
-
               // place here MARKERS of Cafes
-
+              var CafeMarker0 = _cafeMarker2.default.setCafeMarker(allCafes[0][0], map);
+              var CafeMarker1 = _cafeMarker2.default.setCafeMarker(allCafes[1][0], map);
+              var CafeMarker2 = _cafeMarker2.default.setCafeMarker(allCafes[2][0], map);
+              var CafeMarker3 = _cafeMarker2.default.setCafeMarker(allCafes[3][0], map);
 
               //delete last elem of each cafe - which is counted distance
               allCafes.forEach(function (elem, i) {
@@ -11885,6 +11888,10 @@ var _setNamesetAddress2 = _interopRequireDefault(_setNamesetAddress);
 var _myMarker = __webpack_require__(367);
 
 var _myMarker2 = _interopRequireDefault(_myMarker);
+
+var _cafeMarker = __webpack_require__(368);
+
+var _cafeMarker2 = _interopRequireDefault(_cafeMarker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18011,6 +18018,36 @@ var moduleMyMarker = function () {
 }();
 
 exports.default = moduleMyMarker;
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var moduleCafeMarker = function () {
+
+  var _setMyMarker = function _setMyMarker(latLng, map) {
+
+    var marker = new google.maps.Marker({
+      map: map,
+      position: { lat: latLng.lat(), lng: latLng.lng() }
+    });
+
+    return marker;
+  };
+
+  return {
+    setCafeMarker: _setMyMarker
+  };
+}();
+
+exports.default = moduleCafeMarker;
 
 /***/ })
 /******/ ]);
