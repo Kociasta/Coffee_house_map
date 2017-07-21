@@ -25,7 +25,7 @@ import moduleCafeMarker from './cafeMarker.js';
       map = moduleInitMap.map();
       geocoder = moduleInitMap.geocoder();
 
-      moduleFirebase.setName(); // set name of Cafe and address
+      moduleFirebase.setName(); // set name of Cafe and address - random
 
     }
 
@@ -36,27 +36,26 @@ import moduleCafeMarker from './cafeMarker.js';
       let markersMy = [];
       let markersCafes = [];
 
-      $('html').on("keyup" , (event) => { // event on Enter up
-        if(event.keyCode == enter){
-          allCafes = null; // it could not be here
-          moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
-          // clearing input value
-          $('#where').val(" ") ;
-          
-          if(markersMy[0] && markersCafes[0]){
-            markersMy[0].setMap(null);
-            markersCafes
-            for(let i = 0 ; i<4 ; i++){
-              markersCafes[i].setMap(null);
-            }
+      function findCafes() {
+        allCafes = null; // it could not be here
+        moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
+        // clearing input value
+        $('#where').val(" ") ;
+
+        // if arrays are not empty - remove markers
+        if(markersMy[0] && markersCafes[0]){
+          markersMy[0].setMap(null);
+          for(let i = 0 ; i<4 ; i++){
+            markersCafes[i].setMap(null);
           }
-          markersMy.splice(0,1);
-          markersCafes.splice(0,4);
         }
-      });
+        // after all - cut out previous search
+        markersMy.splice(0,1);
+        markersCafes.splice(0,4);
+      }
 
       function onGeocoded(resultLatLng) {
-        // place here MARKER of my position
+        // make MARKER of my searching address
         let myPositionMarker = moduleMyMarker.setMyMarker(resultLatLng , map);
         markersMy.push(myPositionMarker);
 
@@ -64,8 +63,8 @@ import moduleCafeMarker from './cafeMarker.js';
         allCafes = moduleSortCafes.allCafes(resultLatLng);
         // setting Name i Address in HTML (nearest)
         moduleSetNameSetAddress.set(allCafes);
-        // place here MARKERS of Cafes
 
+        // make MARKERS of nearest Cafes
         for(let i = 0 ; i<4 ; i++){
           markersCafes.push(moduleCafeMarker.setCafeMarker(allCafes[i][0] , map) );
         }
@@ -74,14 +73,26 @@ import moduleCafeMarker from './cafeMarker.js';
         allCafes.forEach((elem , i) => {
             elem.splice(-1,1);
         });
-
-
       }
+
+
+      //EVENTS
+      $('html').on("keyup" , (event) => {
+        if(event.keyCode == enter){
+          findCafes();
+        }
+      });
+
+      $('#find').on('click' , (event) => {
+        findCafes();
+      });
+
+
+
     }
 
     async function start() {
       await second();
-
     }
 
     start()

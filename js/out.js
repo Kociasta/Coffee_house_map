@@ -11755,7 +11755,7 @@ var first = function () {
             map = _initMap2.default.map();
             geocoder = _initMap2.default.geocoder();
 
-            _fb2.default.setName(); // set name of Cafe and address
+            _fb2.default.setName(); // set name of Cafe and address - random
 
           case 6:
           case 'end':
@@ -11772,13 +11772,13 @@ var first = function () {
 
 var second = function () {
   var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var allCafes, markersMy, markersCafes, onGeocoded;
+    var allCafes, markersMy, markersCafes, findCafes, onGeocoded;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             onGeocoded = function onGeocoded(resultLatLng) {
-              // place here MARKER of my position
+              // make MARKER of my searching address
               var myPositionMarker = _myMarker2.default.setMyMarker(resultLatLng, map);
               markersMy.push(myPositionMarker);
 
@@ -11786,8 +11786,8 @@ var second = function () {
               allCafes = _sortCafes2.default.allCafes(resultLatLng);
               // setting Name i Address in HTML (nearest)
               _setNamesetAddress2.default.set(allCafes);
-              // place here MARKERS of Cafes
 
+              // make MARKERS of nearest Cafes
               for (var i = 0; i < 4; i++) {
                 markersCafes.push(_cafeMarker2.default.setCafeMarker(allCafes[i][0], map));
               }
@@ -11798,36 +11798,45 @@ var second = function () {
               });
             };
 
-            _context2.next = 3;
+            findCafes = function findCafes() {
+              allCafes = null; // it could not be here
+              _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
+              // clearing input value
+              $('#where').val(" ");
+
+              // if arrays are not empty - remove markers
+              if (markersMy[0] && markersCafes[0]) {
+                markersMy[0].setMap(null);
+                for (var i = 0; i < 4; i++) {
+                  markersCafes[i].setMap(null);
+                }
+              }
+              // after all - cut out previous search
+              markersMy.splice(0, 1);
+              markersCafes.splice(0, 4);
+            };
+
+            _context2.next = 4;
             return first();
 
-          case 3:
+          case 4:
             allCafes = void 0;
             markersMy = [];
             markersCafes = [];
 
 
+            //EVENTS
             $('html').on("keyup", function (event) {
-              // event on Enter up
               if (event.keyCode == enter) {
-                allCafes = null; // it could not be here
-                _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
-                // clearing input value
-                $('#where').val(" ");
-
-                if (markersMy[0] && markersCafes[0]) {
-                  markersMy[0].setMap(null);
-                  markersCafes;
-                  for (var i = 0; i < 4; i++) {
-                    markersCafes[i].setMap(null);
-                  }
-                }
-                markersMy.splice(0, 1);
-                markersCafes.splice(0, 4);
+                findCafes();
               }
             });
 
-          case 7:
+            $('#find').on('click', function (event) {
+              findCafes();
+            });
+
+          case 9:
           case 'end':
             return _context2.stop();
         }
