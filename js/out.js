@@ -11772,7 +11772,7 @@ var first = function () {
 
 var second = function () {
   var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var allCafes, markersMy, markersCafes, findCafes, onGeocoded;
+    var allCafes, markersMy, markersCafes, infowindow, findCafes, onGeocoded;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -11788,8 +11788,20 @@ var second = function () {
               _setNamesetAddress2.default.set(allCafes);
 
               // make MARKERS of nearest Cafes
+
+              var _loop = function _loop(i) {
+                markersCafes.push(_cafeMarker2.default.setCafeMarker(allCafes[i][0], map, allCafes[i][1].name()));
+                markersCafes[i].addListener('mouseover', function () {
+                  infowindow.setContent(markersCafes[i].title);
+                  infowindow.open(map, markersCafes[i]);
+                });
+                markersCafes[i].addListener('mouseout', function () {
+                  infowindow.close(map, markersCafes[i]);
+                });
+              };
+
               for (var i = 0; i < 4; i++) {
-                markersCafes.push(_cafeMarker2.default.setCafeMarker(allCafes[i][0], map));
+                _loop(i);
               }
 
               //delete last elem of each cafe - which is counted distance
@@ -11823,6 +11835,7 @@ var second = function () {
             allCafes = void 0;
             markersMy = [];
             markersCafes = [];
+            infowindow = new google.maps.InfoWindow();
 
 
             //EVENTS
@@ -11836,7 +11849,7 @@ var second = function () {
               findCafes();
             });
 
-          case 9:
+          case 10:
           case 'end':
             return _context2.stop();
         }
@@ -18053,15 +18066,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var moduleCafeMarker = function () {
 
-  var _setMyMarker = function _setMyMarker(latLng, map) {
+  // let infowindow = new google.maps.InfoWindow();
+
+  var _setMyMarker = function _setMyMarker(latLng, map, name) {
 
     var marker = new google.maps.Marker({
       map: map,
       position: { lat: latLng.lat(), lng: latLng.lng() },
       // icon: 'img/kociasta_ico.png',
-      animation: google.maps.Animation.DROP
+      animation: google.maps.Animation.DROP,
+      title: name
     });
-
     return marker;
   };
 

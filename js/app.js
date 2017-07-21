@@ -35,6 +35,7 @@ import moduleCafeMarker from './cafeMarker.js';
       let allCafes;
       let markersMy = [];
       let markersCafes = [];
+      let infowindow = new google.maps.InfoWindow();
 
       function findCafes() {
         allCafes = null; // it could not be here
@@ -66,7 +67,15 @@ import moduleCafeMarker from './cafeMarker.js';
 
         // make MARKERS of nearest Cafes
         for(let i = 0 ; i<4 ; i++){
-          markersCafes.push(moduleCafeMarker.setCafeMarker(allCafes[i][0] , map) );
+          markersCafes.push(moduleCafeMarker.setCafeMarker(allCafes[i][0] , map , allCafes[i][1].name() ) );
+          markersCafes[i].addListener('mouseover', function() {
+    	        infowindow.setContent(markersCafes[i].title);
+              infowindow.open(map, markersCafes[i]);
+          });
+          markersCafes[i].addListener('mouseout', function() {
+            infowindow.close(map, markersCafes[i]);
+          });
+
         }
 
         //delete last elem of each cafe - which is counted distance
