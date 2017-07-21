@@ -34,14 +34,24 @@ import moduleCafeMarker from './cafeMarker.js';
 
       let allCafes;
       let markersMy = [];
+      let markersCafes = [];
+
       $('html').on("keyup" , (event) => { // event on Enter up
         if(event.keyCode == enter){
           allCafes = null; // it could not be here
           moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
           // clearing input value
           $('#where').val(" ") ;
-          if(markersMy[0]){ markersMy[0].setMap(null);}
+          
+          if(markersMy[0] && markersCafes[0]){
+            markersMy[0].setMap(null);
+            markersCafes
+            for(let i = 0 ; i<4 ; i++){
+              markersCafes[i].setMap(null);
+            }
+          }
           markersMy.splice(0,1);
+          markersCafes.splice(0,4);
         }
       });
 
@@ -49,18 +59,16 @@ import moduleCafeMarker from './cafeMarker.js';
         // place here MARKER of my position
         let myPositionMarker = moduleMyMarker.setMyMarker(resultLatLng , map);
         markersMy.push(myPositionMarker);
-        console.log(markersMy);
 
         // sorting data in distance order
         allCafes = moduleSortCafes.allCafes(resultLatLng);
         // setting Name i Address in HTML (nearest)
         moduleSetNameSetAddress.set(allCafes);
         // place here MARKERS of Cafes
-        let CafeMarker0 = moduleCafeMarker.setCafeMarker(allCafes[0][0] , map);
-        let CafeMarker1 = moduleCafeMarker.setCafeMarker(allCafes[1][0] , map);
-        let CafeMarker2 = moduleCafeMarker.setCafeMarker(allCafes[2][0] , map);
-        let CafeMarker3 = moduleCafeMarker.setCafeMarker(allCafes[3][0] , map);
 
+        for(let i = 0 ; i<4 ; i++){
+          markersCafes.push(moduleCafeMarker.setCafeMarker(allCafes[i][0] , map) );
+        }
 
         //delete last elem of each cafe - which is counted distance
         allCafes.forEach((elem , i) => {

@@ -5,7 +5,11 @@ let moduleMyMarker = (function(){
     map.setCenter(latLng);
     let marker = new google.maps.Marker({
         map: map,
-        position: latLng
+        position: latLng,
+        icon: {
+         path: google.maps.SymbolPath.CIRCLE,
+         scale: 6
+       },
     });
 
     return marker;

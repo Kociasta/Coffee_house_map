@@ -11772,7 +11772,7 @@ var first = function () {
 
 var second = function () {
   var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var allCafes, markersMy, onGeocoded;
+    var allCafes, markersMy, markersCafes, onGeocoded;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -11781,17 +11781,16 @@ var second = function () {
               // place here MARKER of my position
               var myPositionMarker = _myMarker2.default.setMyMarker(resultLatLng, map);
               markersMy.push(myPositionMarker);
-              console.log(markersMy);
 
               // sorting data in distance order
               allCafes = _sortCafes2.default.allCafes(resultLatLng);
               // setting Name i Address in HTML (nearest)
               _setNamesetAddress2.default.set(allCafes);
               // place here MARKERS of Cafes
-              var CafeMarker0 = _cafeMarker2.default.setCafeMarker(allCafes[0][0], map);
-              var CafeMarker1 = _cafeMarker2.default.setCafeMarker(allCafes[1][0], map);
-              var CafeMarker2 = _cafeMarker2.default.setCafeMarker(allCafes[2][0], map);
-              var CafeMarker3 = _cafeMarker2.default.setCafeMarker(allCafes[3][0], map);
+
+              for (var i = 0; i < 4; i++) {
+                markersCafes.push(_cafeMarker2.default.setCafeMarker(allCafes[i][0], map));
+              }
 
               //delete last elem of each cafe - which is counted distance
               allCafes.forEach(function (elem, i) {
@@ -11805,6 +11804,8 @@ var second = function () {
           case 3:
             allCafes = void 0;
             markersMy = [];
+            markersCafes = [];
+
 
             $('html').on("keyup", function (event) {
               // event on Enter up
@@ -11813,14 +11814,20 @@ var second = function () {
                 _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
                 // clearing input value
                 $('#where').val(" ");
-                if (markersMy[0]) {
+
+                if (markersMy[0] && markersCafes[0]) {
                   markersMy[0].setMap(null);
+                  markersCafes;
+                  for (var i = 0; i < 4; i++) {
+                    markersCafes[i].setMap(null);
+                  }
                 }
                 markersMy.splice(0, 1);
+                markersCafes.splice(0, 4);
               }
             });
 
-          case 6:
+          case 7:
           case 'end':
             return _context2.stop();
         }
@@ -18006,7 +18013,11 @@ var moduleMyMarker = function () {
     map.setCenter(latLng);
     var marker = new google.maps.Marker({
       map: map,
-      position: latLng
+      position: latLng,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 6
+      }
     });
 
     return marker;
