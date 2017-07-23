@@ -12,27 +12,25 @@
 <body>
   <div class="container">
 
-    <div class="first row">
-      <header class="col-md-12 col-lg-12">
-        <div class="title">Wawa <span>coffee map</span></div>
-        <!-- <nav calss="col-6">  </nav> -->
-      </header>
-    </div>
+    <header class="first row col-md-12 col-lg-12">
+      <div class="title">Wawa <span>coffee map</span></div>
+      <!-- <nav calss="col-6">  </nav> -->
+    </header>
 
     <div class="second row">
       <section class="filters col-md-12 col-lg-12" >
-        <label> gdzie na kawę ? <label>
+        <label id="labelWhere"> gdzie na kawę ? <label>
         <input id="where" value="" placeholder="podaj adres" autofocus />
         <!-- <label> o której? <label>
         <input id="when" placeholder="podaj do której godziny chcesz siedzieć"/> -->
-        <button id="find">Szukaj</button>
+        <button id="find"> &gt; </button>
       </section>
     </div>
 
 
     <section class="content third row">
        <!-- here showed tag articles with img and short desc -->
-      <div class="articles  col-md-3 col-lg-3">
+      <div class="articles  col-md-2 col-lg-2">
         <div class="row">
           <article class="col-12">
             <div class="hidden" > zdjęcie </div>
@@ -56,7 +54,7 @@
           </article>
         </div>
       </div>
-      <div class="map col-md-9 col-lg-9">
+      <div class="map col-md-10 col-lg-10">
         <div id="map"></div>
       </div>
     </section>
