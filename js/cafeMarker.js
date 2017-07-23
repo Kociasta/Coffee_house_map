@@ -8,7 +8,7 @@ let moduleCafeMarker = (function(){
     let marker = new google.maps.Marker({
         map: map,
         position: {lat:latLng.lat() , lng: latLng.lng()} ,
-        // icon: 'img/kociasta_ico.png',
+        icon: 'img/icons/slice8.png',
         animation: google.maps.Animation.DROP,
         title: name
     });

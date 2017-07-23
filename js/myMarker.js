@@ -6,11 +6,9 @@ let moduleMyMarker = (function(){
     let marker = new google.maps.Marker({
         map: map,
         position: latLng,
-        
-        icon: {
-         path: google.maps.SymbolPath.CIRCLE,
-         scale: 6
-       },
+
+        icon: 'img/icons/slice6.png',
+
     });
 
     return marker;

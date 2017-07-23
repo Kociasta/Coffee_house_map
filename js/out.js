@@ -18037,10 +18037,8 @@ var moduleMyMarker = function () {
       map: map,
       position: latLng,
 
-      icon: {
-        path: google.maps.SymbolPath.CIRCLE,
-        scale: 6
-      }
+      icon: 'img/icons/slice6.png'
+
     });
 
     return marker;
@@ -18073,7 +18071,7 @@ var moduleCafeMarker = function () {
     var marker = new google.maps.Marker({
       map: map,
       position: { lat: latLng.lat(), lng: latLng.lng() },
-      // icon: 'img/kociasta_ico.png',
+      icon: 'img/icons/slice8.png',
       animation: google.maps.Animation.DROP,
       title: name
     });
