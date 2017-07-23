@@ -1,13 +1,19 @@
 // SASS file with all styles
-@import "grid";
+// @import "modules/grid";
+@import "modules/bootstrap";
 $color: #ffccdd;
+$mainRed: #f2786a;
+$textRed: #d35252;
+$mainYellow: #ffb752;
+$mainPale: #f8f8f7;
 
 
 * {
   // border: 1px solid $color;
-   font-family: 'Comfortaa', cursive;
-   margin-top: 2px;
-   padding: 2px;
+  //  font-family: 'Comfortaa', cursive;
+   font-family: 'Lato', sans-serif;
+  //  margin-top: 2px;
+  //  padding: 2px;
 }
 
 .hidden {
@@ -15,18 +21,32 @@ $color: #ffccdd;
 }
 
 header {
-  border: 1px solid $color;
-  padding: 5px;
+  height: 40px;
+  padding-top: 10px;
+  padding-left: 18px;
+  padding-bottom: 10px;
+  background-color: $mainRed;
 }
 
 .title {
-  font-size: 30px;
-  font-family: 'Lobster', cursive;
+  font-size: 20px;
+  color: $textRed;
+  text-transform: uppercase;
+
+  span {
+    color: $mainRed;
+    text-shadow: -1px 0 $textRed, 0 1px $textRed, 1px 0 $textRed, 0 -1px $textRed;
+  }
 }
 
 .filters {
-  padding: 5px;
-  border: 1px solid $color;
+  height: 40px;
+  padding-top: 12px;
+  padding-left: 18px;
+  padding-bottom: 12px;
+  background-color: $mainYellow;
+  text-transform: uppercase;
+  color: $mainPale;
 }
 
 #when {
