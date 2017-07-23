@@ -6,7 +6,9 @@ $mainRed: #f2786a;
 $textRed: #d35252;
 $mainYellow: #ffb752;
 $mainPale: #f8f8f7;
-
+$mainGrey: #f1f1f1;
+$darkGrey: #d9d9d9;
+$grey: #e8e8e8;
 
 * {
   // border: 1px solid $color;
@@ -14,14 +16,22 @@ $mainPale: #f8f8f7;
    font-family: 'Lato', sans-serif;
   //  margin-top: 2px;
   //  padding: 2px;
+  box-sizing: border-box;
 }
 
 .hidden {
   display: none;
 }
 
+.container {
+  height: 100vh;
+}
+.first .row , .second .row , .firth .row {
+  height: 6%;
+}
+
 header {
-  height: 40px;
+  // height: 6%;
   padding-top: 10px;
   padding-left: 18px;
   padding-bottom: 10px;
@@ -40,7 +50,7 @@ header {
 }
 
 .filters {
-  height: 40px;
+  // height: 6%;
   padding-top: 12px;
   padding-left: 18px;
   padding-bottom: 12px;
@@ -49,27 +59,51 @@ header {
   color: $mainPale;
 }
 
+
 #when {
-    width: 300px;
+    // width: 300px;
 }
 
-#map {
-  // background-color: red;
-  border: 1px solid $color;
-  width: 100%;
-  height: 350px;
+section.content {
+  height: 76%;
 }
-
+.map {
+  height: 100%;
+  #map {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
 .articles {
-  border: 1px solid $color;
-  height: 350px;
+  height: 100%;
+  .row{
+  height: 100%;
+  }
+
 }
 
 article {
   height: 25%;
-  border: 1px solid $color;
-  padding-top: 15px;
+  background-color: $mainGrey;
+  border: 1px solid $grey;
+  // border-radius: 2px;
+  // padding-top: 15px;
+  .cafe-name {
+    color: #555555;
+  }
+  .cafe-address {
+    color: #aaaaaa;
+  }
 }
+
+footer {
+  // height: 6%;
+  background-color: $mainRed;
+}
+
+
 
 img {
   width: 40px;
