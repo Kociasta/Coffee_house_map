@@ -1,7 +1,7 @@
 // file with all code / logics
 
 import * as Firebase from 'firebase'; // my coffee places with detail info
-import './../css/style.scss';
+import './../css/style2.scss';
 import moduleFirebase from './fb.js';
 import moduleDistance from './distance.js';
 import moduleInitMap from './initMap.js';

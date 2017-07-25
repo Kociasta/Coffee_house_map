@@ -1,0 +1,143 @@
+$color: #ffccdd;
+$mainRed: #f2786a;
+$textRed: #d35252;
+$mainYellow: #ffb752;
+$mainPale: #f8f8f7;
+$mainGrey: #f1f1f1;
+$darkGrey: #d9d9d9;
+$grey: #e8e8e8;
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box;
+}
+.hidden {
+  display: none;
+}
+
+// header, section, footer {
+//   display: flex;
+// }
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: repeat(3 , 1fr);
+  grid-template-rows: 6% 6% auto 6%;
+}
+
+.first {
+  grid-column: 1 / 4;
+  grid-row: 1;
+  padding-top: 10px;
+  padding-left: 18px;
+  padding-bottom: 10px;
+  background-color: $mainRed;
+  .title {
+    font-size: 20px;
+    height: 100%;
+    color: $textRed;
+    text-transform: uppercase;
+
+    span {
+      font-weight: bold;
+      color: $mainRed;
+      text-shadow: -1px 0 $textRed, 0 1px $textRed, 1px 0 $textRed, 0 -1px $textRed;
+    }
+  }
+}
+
+.second {
+  grid-column: 1 / 4;
+  grid-row: 2;
+  background-color: $mainYellow;
+  text-transform: uppercase;
+  color: $mainPale;
+  position: relative;
+
+  #labelWhere {
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+  }
+
+  #where {
+    margin-left: 18px;
+    height: 100%;
+    width: 220px;
+    background-color: $mainGrey;
+    border: 0;
+    padding-left: 20px;
+    margin-right: 0;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  #find {
+    height: 100%;
+    width: 2em;
+    font-size: 30px;
+    background-color: #784754;
+    color: $grey;
+    border: 0;
+    position: absolute;
+  }
+}
+
+.third {
+  grid-column: 1 / 4;
+  grid-row: 3;
+}
+
+.forth {
+  grid-column: 1 / 4;
+  grid-row: 4;
+  background-color: $mainRed;
+  display: flex;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(5 , minmax(max-content , 1fr));
+  grid-template-rows: repeat(6 , auto);
+
+  .articles {
+    grid-column: 1 / 2;
+    grid-row: 1/6;
+    z-index: 1;
+
+    article {
+      height: 25%;
+      background-color: $mainGrey;
+      border: 5px solid $grey;
+      // border-radius: 2px;
+      padding-top: 20px;
+      padding-left: 20px;
+
+      .cafe-name {
+        color: #555555;
+      }
+
+      .cafe-address {
+        color: #aaaaaa;
+      }
+    }
+  }
+  .map {
+    grid-column: 1 / 6;
+    grid-row: 1/7;
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+
+img {
+  width: 10px;
+  height: 10px;
+}
