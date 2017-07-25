@@ -13,13 +13,12 @@ $grey: #e8e8e8;
   font-family: 'Lato', sans-serif;
   box-sizing: border-box;
 }
+
 .hidden {
   display: none;
 }
 
-// header, section, footer {
-//   display: flex;
-// }
+
 .container {
   height: 100vh;
   width: 100vw;
@@ -31,17 +30,18 @@ $grey: #e8e8e8;
 .first {
   grid-column: 1 / 4;
   grid-row: 1;
-  padding-top: 10px;
-  padding-left: 18px;
-  padding-bottom: 10px;
   background-color: $mainRed;
+
   .title {
+    display: flex;
+    padding-left: 2rem;
     font-size: 20px;
     height: 100%;
     color: $textRed;
     text-transform: uppercase;
+    align-items: center;
 
-    span {
+    span:last-child {
       font-weight: bold;
       color: $mainRed;
       text-shadow: -1px 0 $textRed, 0 1px $textRed, 1px 0 $textRed, 0 -1px $textRed;
@@ -55,34 +55,39 @@ $grey: #e8e8e8;
   background-color: $mainYellow;
   text-transform: uppercase;
   color: $mainPale;
-  position: relative;
 
-  #labelWhere {
-    margin-top: 10px;
-    padding-left: 20px;
-    padding-bottom: 10px;
-  }
-
-  #where {
-    margin-left: 18px;
+  section {
     height: 100%;
-    width: 220px;
-    background-color: $mainGrey;
-    border: 0;
-    padding-left: 20px;
-    margin-right: 0;
-    font-size: 14px;
-    display: inline-block;
-  }
+    display: flex;
 
-  #find {
-    height: 100%;
-    width: 2em;
-    font-size: 30px;
-    background-color: #784754;
-    color: $grey;
-    border: 0;
-    position: absolute;
+    #labelWhere {
+      align-self: center;
+      padding-left: 2rem;
+      padding-right: 1em;
+    }
+
+    #where {
+      padding-left: 1em;
+      background-color: $mainGrey;
+      border: 0;
+      width: 18em;
+      font-size: 14px;
+      text-transform: uppercase;
+
+      &:focus { // input - remove blue shine when focus
+        outline-color: transparent;
+      }
+    }
+
+
+
+    #find {
+      width: 2em;
+      font-size: 30px;
+      background-color: #784754;
+      color: $grey;
+      border: 0;
+    }
   }
 }
 
