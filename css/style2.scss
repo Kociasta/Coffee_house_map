@@ -54,19 +54,24 @@ $grey: #e8e8e8;
   grid-row: 2;
   background-color: $mainYellow;
   text-transform: uppercase;
-  color: $mainPale;
 
-  section {
+
+  .filters {
     height: 100%;
     display: flex;
+    // flex-wrap: wrap;
+    align-items: center;
 
     #labelWhere {
-      align-self: center;
+      // align-self: center;
+      min-width: max-content;
       padding-left: 2rem;
       padding-right: 1em;
+      color: $mainPale;
     }
 
     #where {
+      height: 100%;
       padding-left: 1em;
       background-color: $mainGrey;
       border: 0;
@@ -75,13 +80,13 @@ $grey: #e8e8e8;
       text-transform: uppercase;
 
       &:focus { // input - remove blue shine when focus
-        outline-color: transparent;
+        outline-style: none;
+        border: 0;
       }
     }
 
-
-
     #find {
+      height: 100%;
       width: 2em;
       font-size: 30px;
       background-color: #784754;
