@@ -11812,7 +11812,16 @@ var second = function () {
               findCafes();
             });
 
-          case 10:
+            $('article').on("click", function (event) {
+              // making markers bouncing when click to desc
+              markersCafes.forEach(function (elem) {
+                elem.setAnimation(null);
+              });
+              // I use this instead of event.target because this point to article and even.target can point to div with name and address - and it has no id
+              markersCafes[this.id].setAnimation(google.maps.Animation.BOUNCE);
+            });
+
+          case 11:
           case 'end':
             return _context2.stop();
         }
