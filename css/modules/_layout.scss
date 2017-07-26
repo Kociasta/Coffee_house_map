@@ -69,9 +69,7 @@ _______________________________________________
     height: 100%;
 
     .cafes {
-      grid-column: 1 / 2;
-      grid-row: 1 / 5;
-      z-index: 1;
+      display: none;
     }
 
     .map {
@@ -106,8 +104,29 @@ _______________________________________________
       height: 1em;
     }
   }
-
   .title-small {
-    justify-self: right;
+    display: none;
+  }
+
+}
+
+@media screen and (min-width: 600px) {
+  .third {
+    .content{
+      .cafes {
+        display: flex;
+        flex-direction: column;
+        grid-column: 1 / 2;
+        grid-row: 1 / 5;
+        z-index: 1;
+      }
+    }
+  }
+
+  .forth{
+    .title-small {
+      display: inline-block;
+      justify-self: right;
+    }
   }
 }
