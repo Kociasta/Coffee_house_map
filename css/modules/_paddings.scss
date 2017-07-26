@@ -1,0 +1,48 @@
+/* every padding in the project*/
+header {
+  .title {
+    padding-left: 2rem;
+  }
+}
+
+.filters {
+  #labelWhere {
+    padding-left: 2rem;
+    padding-right: 1em;
+  }
+
+  #where {
+    padding-left: 1em;
+  }
+
+  #find {
+  }
+}
+
+.content {
+  .cafes {
+    padding: 0.5em;
+    article {
+      padding: 1em;
+    }
+  }
+  .map {
+  }
+}
+
+footer {
+  .copy{
+    padding-left: 1em;
+  }
+
+  .media{
+    a{
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+  }
+
+  .title-small {
+    padding-right: 1em;
+  }
+}

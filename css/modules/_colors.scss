@@ -1,0 +1,67 @@
+/* set all colours and borders */
+
+
+header {
+  background-color: $color-main-red;
+
+  .title {
+    color: $color-text-red;
+
+    span:last-child {
+      color: $color-main-red;
+      text-shadow: -1px 0 $color-text-red, 0 1px $color-text-red, 1px 0 $color-text-red, 0 -1px $color-text-red;
+    }
+  }
+}
+
+.filters {
+  background-color: $color-main-yellow;
+
+  #labelWhere {
+    color: $color-text-pale;
+  }
+
+  #where {
+    background-color: $color-main-grey;
+
+    &:focus { // input - remove blue shine when focus
+    }
+  }
+
+  #find {
+    background-color: $color-button;
+    color: $color-grey;
+  }
+}
+
+
+.content {
+  .cafes {
+    article {
+      background-color: $color-main-grey;
+      border: 5px solid $color-grey;
+
+      .cafe-name {
+        color: $color-text-darkGrey;
+      }
+
+      .cafe-address {
+        color: $color-text-grey;
+      }
+    }
+  }
+  .map {
+  }
+}
+
+footer {
+  color: $color-text-red;
+  .copy{
+  }
+
+  .media{
+  }
+
+  .title-small {
+  }
+}

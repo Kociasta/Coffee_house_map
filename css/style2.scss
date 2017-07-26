@@ -1,151 +1,68 @@
-$color: #ffccdd;
-$mainRed: #f2786a;
-$textRed: #d35252;
-$mainYellow: #ffb752;
-$mainPale: #f8f8f7;
-$mainGrey: #f1f1f1;
-$darkGrey: #d9d9d9;
-$grey: #e8e8e8;
-
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Lato', sans-serif;
-  box-sizing: border-box;
-}
-
-.hidden {
-  display: none;
-}
-
-
-.container {
-  height: 100vh;
-  width: 100vw;
-  display: grid;
-  grid-template-columns: repeat(3 , 1fr);
-  grid-template-rows: 6% 6% auto 4%;
-}
-
-.first {
-  grid-column: 1 / 4;
-  grid-row: 1;
-  background-color: $mainRed;
+@import	"./modules/variables";
+@import "./modules/base";
+@import "./modules/layout";
+@import "./modules/paddings";
+@import "./modules/colors";
+header {
 
   .title {
-    display: flex;
-    padding-left: 2rem;
     font-size: 20px;
-    height: 100%;
-    color: $textRed;
     text-transform: uppercase;
-    align-items: center;
 
     span:last-child {
       font-weight: bold;
-      color: $mainRed;
-      text-shadow: -1px 0 $textRed, 0 1px $textRed, 1px 0 $textRed, 0 -1px $textRed;
     }
   }
 }
 
-.second {
-  grid-column: 1 / 4;
-  grid-row: 2;
-  background-color: $mainYellow;
+.filters {
   text-transform: uppercase;
 
+  #labelWhere {
+  }
 
-  .filters {
-    height: 100%;
-    display: flex;
-    align-items: center;
+  #where {
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 0;
 
-    #labelWhere {
-      min-width: max-content;
-      padding-left: 2rem;
-      padding-right: 1em;
-      color: $mainPale;
-    }
-
-    #where {
-      height: 100%;
-      padding-left: 1em;
-      background-color: $mainGrey;
-      border: 0;
-      width: 18em;
-      font-size: 14px;
-      text-transform: uppercase;
-
-      &:focus { // input - remove blue shine when focus
-        outline-style: none;
-        border: 0;
-      }
-    }
-
-    #find {
-      height: 100%;
-      width: 2em;
-      font-size: 30px;
-      background-color: #784754;
-      color: $grey;
+    &:focus { // input - remove blue shine when focus
+      outline-style: none;
       border: 0;
     }
   }
+
+  #find {
+    font-size: 30px;
+    border: 0;
+  }
 }
 
-.third {
-  grid-column: 1 / 4;
-  grid-row: 3;
-}
-
-.forth {
-  grid-column: 1 / 4;
-  grid-row: 4;
-  background-color: $mainRed;
-  display: flex;
-}
 
 .content {
-  display: grid;
-  grid-template-columns: repeat(5 , minmax(max-content , 1fr));
-  grid-template-rows: repeat(5 , 1fr);
-
-  .articles {
-    padding: 0.5em;
-    grid-column: 1 / 2;
-    grid-row: 1 / 5;
-    z-index: 1;
-
+  .cafes {
     article {
       height: 25%;
-      background-color: $mainGrey;
-      border: 5px solid $grey;
       border-radius: 2px;
-      padding: 1em;
 
       .cafe-name {
-        color: #555555;
       }
 
       .cafe-address {
-        color: #aaaaaa;
       }
     }
   }
   .map {
-    grid-column: 1 / 6;
-    grid-row: 1/7;
-
-    #map {
-      height: 100%;
-      width: 100%;
-    }
   }
 }
 
+footer {
+  .copy{
+  }
 
-img {
-  width: 10px;
-  height: 10px;
+  .media{
+  }
+
+  .title-small {
+  }
 }
