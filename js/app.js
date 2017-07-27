@@ -8,7 +8,7 @@ import moduleSortCafes from './sortCafes.js';
 import moduleSetNameSetAddress from './setNamesetAddress.js';
 import moduleMyMarker from './myMarker.js';
 import moduleCafeMarker from './cafeMarker.js';
-
+import getHours from './hours.js';
     const enter = 13;
     // initialize variables
     let map ;
@@ -78,6 +78,8 @@ import moduleCafeMarker from './cafeMarker.js';
         allCafes.forEach((elem , i) => {
             elem.splice(-1,1);
         });
+        getHours(allCafes);
+
       }
 
 
@@ -85,6 +87,7 @@ import moduleCafeMarker from './cafeMarker.js';
       $('html').on("keyup" , (event) => {
         if(event.keyCode == enter){
           findCafes();
+
         }
       });
 
@@ -93,12 +96,12 @@ import moduleCafeMarker from './cafeMarker.js';
       });
 
       $('article').on("click" , function(event){
+        event.preventDefault();
         // making markers bouncing when click to desc
         markersCafes.forEach((elem)=>{elem.setAnimation(null)});
         // I use this instead of event.target because this point to article and even.target can point to div with name and address - and it has no id
         markersCafes[this.id].setAnimation(google.maps.Animation.BOUNCE);
       });
-
 
 
     }

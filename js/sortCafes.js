@@ -4,6 +4,7 @@ import moduleFirebase from './fb.js';
 let moduleSortCafes = (function(resultLatLng) {
 
   let _allCafes = moduleFirebase.coffeeAddress();
+  
   let takeAllCafes = function(resultLatLng) {
 
     _allCafes.forEach((elem, i ) => {
