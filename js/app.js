@@ -8,7 +8,6 @@ import moduleSortCafes from './sortCafes.js';
 import moduleSetNameSetAddress from './setNamesetAddress.js';
 import moduleMyMarker from './myMarker.js';
 import moduleCafeMarker from './cafeMarker.js';
-import getHours from './hours.js';
     const enter = 13;
     // initialize variables
     let map ;
@@ -78,7 +77,6 @@ import getHours from './hours.js';
         allCafes.forEach((elem , i) => {
             elem.splice(-1,1);
         });
-        getHours(allCafes);
 
       }
 
