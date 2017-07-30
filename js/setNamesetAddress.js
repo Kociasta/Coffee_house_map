@@ -18,16 +18,27 @@ let moduleSetNameSetAddress = (function(allCafes) {
 
     // here - changing hours
     $(".cafe-hours-from").each((i , elem) => { // find elements with class cafe-name
-      console.log(typeof getHours(allCafes[i]).from);
-      console.log(typeof parseInt(getHours(allCafes[i]).from , 10));
-      console.log(parseInt(getHours(allCafes[i]).from) + "?")
-        let from = parseInt(getHours(allCafes[i]).from , 10);
+
+      if(getHours(allCafes[i]).from === "") {
+        $(elem).html(`<span class="closed">ZAMKNIĘTE</span>`);
+        $(elem).css("width" , `50%`);
+
+      } else {
+        var from = parseInt(getHours(allCafes[i]).from , 10);
+
         $(elem).css("width" , `${(from-6)*5}%`);
         // $(elem).text(getHours(allCafes[i]).from);
         $(elem).html(`<span>${from}:00</span>`);
         // console.log(getHours(allCafes[i]).from);
+      }
+
+
     });
     $(".cafe-hours-to").each((i , elem) => { // find elements with class cafe-name
+      if(getHours(allCafes[i]).to === "") {
+        $(elem).html(`<span> </span>`);
+        $(elem).css("width" , `0`);
+      } else {
         let to = parseInt(getHours(allCafes[i]).to ,10);
         if(to < 16) {
           $(elem).css("width" , `${(24-6)*5}%`);
@@ -39,6 +50,8 @@ let moduleSetNameSetAddress = (function(allCafes) {
           $(elem).html(`<span>${to}:00</span>`);
         }
         // console.log(to);
+      }
+
 
     });
   }
