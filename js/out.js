@@ -18036,11 +18036,18 @@ var moduleSetNameSetAddress = function (allCafes) {
 
         var from = (0, _hours2.default)(allCafes[i]).from; // 2 type of data in base -> "8" or "7:30"
 
-        if (from.length === 1) {
+        if (from.length === 1 || from.length === 2) {
           $(elem).css("width", (parseInt(from, 10) - 6) * 5 + "%");
           $(elem).html("<span>" + from + "<sup>00</sup></span>");
         } else {
-          var min = from[2] + from[3]; //return string made of 2 numbers e.g. from[2]=3, from[3]=0 -> min=30
+          var min = void 0;
+          if (from.length === 4) {
+            // case 1-digit hour
+            min = from[2] + from[3]; //return string made of 2 numbers e.g. from[2]=3, from[3]=0 -> min=30
+          } else if (from.length === 5) {
+            // case 2-digits hour
+            min = from[3] + from[4];
+          }
           $(elem).css("width", (parseInt(from, 10) - 6) * 5 + "%"); // parse only 1st number e.g. 7:30 -> 7
           $(elem).html("<span>" + parseInt(from, 10) + "<sup>" + min + "</sup></span>");
         }
@@ -18051,15 +18058,13 @@ var moduleSetNameSetAddress = function (allCafes) {
       // find elements with class cafe-hours-to
 
       if ((0, _hours2.default)(allCafes[i]).to === "") {
-        // if cafe is close
+        // if cafe is closed
 
         $(elem).html("<span> </span>"); // clearing previous elem
         $(elem).css("width", "0");
       } else {
-        // if cafe i open
-
-        var to = (0, _hours2.default)(allCafes[i]).to;
-
+        //
+        var to = parseInt((0, _hours2.default)(allCafes[i]).to, 10);
         if (to < 16) {
           $(elem).css("width", (24 - 6) * 5 + "%");
 
