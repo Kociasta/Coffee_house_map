@@ -5,7 +5,7 @@ import moduleDistance from './distance.js';
 import moduleInitMap from './initMap.js';
 import moduleGeocodeMyAddress from './geocodeMyAddress.js';
 import moduleSortCafes from './sortCafes.js';
-import moduleSetNameSetAddress from './setNamesetAddress.js';
+import moduleSetCafesInfo from './setNamesetAddress.js';
 import moduleMyMarker from './myMarker.js';
 import moduleCafeMarker from './cafeMarker.js';
     const enter = 13;
@@ -58,7 +58,7 @@ import moduleCafeMarker from './cafeMarker.js';
         // sorting data in distance order
         allCafes = moduleSortCafes.allCafes(resultLatLng);
         // setting Name i Address in HTML (nearest)
-        moduleSetNameSetAddress.set(allCafes);
+        moduleSetCafesInfo.setCafesInfo(allCafes);
 
         // make MARKERS of nearest Cafes
         for(let i = 0 ; i<4 ; i++){

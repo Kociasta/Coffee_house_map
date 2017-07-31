@@ -1,9 +1,8 @@
 import getHours from './hours.js';
 
-let moduleSetNameSetAddress = (function(allCafes) {
+let moduleSetCafesInfo = (function(allCafes) {
 
   let setHourAndMinutes = function (when , elem , myWidth) {
-
     if(when.length === 1 || when.length === 2 ){
       $(elem).css("width" , `${(parseInt( myWidth ,10)-6)*5}%`);
       $(elem).html(`<span>${when} <sup>00</sup> </span>`);
@@ -17,10 +16,9 @@ let moduleSetNameSetAddress = (function(allCafes) {
       $(elem).css("width" , `${(parseInt(when,10)-6)*5}%`); // parse only 1st number e.g. 7:30 -> 7
       $(elem).html(`<span>${parseInt(when,10)}<sup>${min}</sup></span>`);
     }
-
   }
 
-  let _setNameAndAddress = function(allCafes){
+  let _setCafeInfo = function(allCafes){
 
     $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
         $(elem).text(allCafes[i][1].name);
@@ -75,10 +73,10 @@ let moduleSetNameSetAddress = (function(allCafes) {
 
 
   return {
-    set: _setNameAndAddress
+    setCafesInfo: _setCafeInfo
   }
 
 })();
 
 
-export default moduleSetNameSetAddress;
+export default moduleSetCafesInfo;

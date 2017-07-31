@@ -11751,7 +11751,7 @@ var second = function () {
               // sorting data in distance order
               allCafes = _sortCafes2.default.allCafes(resultLatLng);
               // setting Name i Address in HTML (nearest)
-              _setNamesetAddress2.default.set(allCafes);
+              _setNamesetAddress2.default.setCafesInfo(allCafes);
 
               // make MARKERS of nearest Cafes
 
@@ -18009,10 +18009,9 @@ var _hours2 = _interopRequireDefault(_hours);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var moduleSetNameSetAddress = function (allCafes) {
+var moduleSetCafesInfo = function (allCafes) {
 
   var setHourAndMinutes = function setHourAndMinutes(when, elem, myWidth) {
-
     if (when.length === 1 || when.length === 2) {
       $(elem).css("width", (parseInt(myWidth, 10) - 6) * 5 + "%");
       $(elem).html("<span>" + when + " <sup>00</sup> </span>");
@@ -18030,7 +18029,7 @@ var moduleSetNameSetAddress = function (allCafes) {
     }
   };
 
-  var _setNameAndAddress = function _setNameAndAddress(allCafes) {
+  var _setCafeInfo = function _setCafeInfo(allCafes) {
 
     $(".cafe-name").each(function (i, elem) {
       // find elements with class cafe-name
@@ -18086,11 +18085,11 @@ var moduleSetNameSetAddress = function (allCafes) {
   };
 
   return {
-    set: _setNameAndAddress
+    setCafesInfo: _setCafeInfo
   };
 }();
 
-exports.default = moduleSetNameSetAddress;
+exports.default = moduleSetCafesInfo;
 
 /***/ }),
 /* 367 */
