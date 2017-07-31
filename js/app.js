@@ -20,7 +20,7 @@ import moduleCafeMarker from './cafeMarker.js';
       map = moduleInitMap.map();
       geocoder = moduleInitMap.geocoder();
 
-      moduleFirebase.setName(); // set name of Cafe and address - random
+      moduleFirebase.setName(map); // set name of Cafe and address - random
 
     }
 

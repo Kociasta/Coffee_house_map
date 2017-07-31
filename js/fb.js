@@ -1,4 +1,6 @@
 import * as Firebase from 'firebase'; // my coffee places with detail info
+import moduleCafeMarker from './cafeMarker.js';
+
 let moduleFirebase = (function() {
 
     let param = [];
@@ -17,14 +19,36 @@ let moduleFirebase = (function() {
     let _db = _fb.database().ref();
 
     // set text to name from firebase set adresses from firebase (to the next elems)
-    let _setName = function() {
+    let _setName = function(map) {
       _db.on('value' , (snap) => {
 
         let _random = Math.round(Math.random()*(snap.val().length-4));
-
+        let markers =[];
         $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
+
             $(elem).text(snap.val()[_random+i].name);
-            // console.log(_random);
+
+            let latLng = {
+                lat : function() {return snap.val()[_random+i].geo.lat},
+                lng : function() {return snap.val()[_random+i].geo.lng}
+            }
+
+            let name = snap.val()[_random+i].name;
+
+            markers.push(moduleCafeMarker.setCafeMarker(latLng , map , name));
+
+            $('#find').on('click' , (event) => {
+                for(let i = 0 ; i<4 ; i++){
+                  markers[i].setMap(null);
+                }
+            });
+            $('html').on("keyup" , (event) => {
+              if(event.keyCode === 13){
+                for(let i = 0 ; i<4 ; i++){
+                  markers[i].setMap(null);
+                }
+              }
+            });
         });
 
         $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
