@@ -18011,6 +18011,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var moduleSetNameSetAddress = function (allCafes) {
 
+  var setHourAndMinutes = function setHourAndMinutes(when, elem, myWidth) {
+
+    if (when.length === 1 || when.length === 2) {
+      $(elem).css("width", (parseInt(myWidth, 10) - 6) * 5 + "%");
+      $(elem).html("<span>" + when + " <sup>00</sup> </span>");
+    } else {
+      var min = void 0;
+      if (when.length === 4) {
+        // case 1-digit hour
+        min = when[2] + when[3]; //return string made of 2 numbers e.g. from[2]=3, from[3]=0 -> min=30
+      } else if (when.length === 5) {
+        // case 2-digits hour
+        min = when[3] + when[4];
+      }
+      $(elem).css("width", (parseInt(when, 10) - 6) * 5 + "%"); // parse only 1st number e.g. 7:30 -> 7
+      $(elem).html("<span>" + parseInt(when, 10) + "<sup>" + min + "</sup></span>");
+    }
+  };
+
   var _setNameAndAddress = function _setNameAndAddress(allCafes) {
 
     $(".cafe-name").each(function (i, elem) {
@@ -18036,21 +18055,7 @@ var moduleSetNameSetAddress = function (allCafes) {
 
         var from = (0, _hours2.default)(allCafes[i]).from; // 2 type of data in base -> "8" or "7:30"
 
-        if (from.length === 1 || from.length === 2) {
-          $(elem).css("width", (parseInt(from, 10) - 6) * 5 + "%");
-          $(elem).html("<span>" + from + "<sup>00</sup></span>");
-        } else {
-          var min = void 0;
-          if (from.length === 4) {
-            // case 1-digit hour
-            min = from[2] + from[3]; //return string made of 2 numbers e.g. from[2]=3, from[3]=0 -> min=30
-          } else if (from.length === 5) {
-            // case 2-digits hour
-            min = from[3] + from[4];
-          }
-          $(elem).css("width", (parseInt(from, 10) - 6) * 5 + "%"); // parse only 1st number e.g. 7:30 -> 7
-          $(elem).html("<span>" + parseInt(from, 10) + "<sup>" + min + "</sup></span>");
-        }
+        setHourAndMinutes(from, elem, from);
       }
     });
 
@@ -18063,18 +18068,19 @@ var moduleSetNameSetAddress = function (allCafes) {
         $(elem).html("<span> </span>"); // clearing previous elem
         $(elem).css("width", "0");
       } else {
-        //
-        var to = parseInt((0, _hours2.default)(allCafes[i]).to, 10);
-        if (to < 16) {
-          $(elem).css("width", (24 - 6) * 5 + "%");
+        // if cafe is open
 
-          $(elem).html("<span>" + to + ":00</span>");
+        var to = (0, _hours2.default)(allCafes[i]).to;
+
+        if (parseInt(to, 10) < 16) {
+          // case: cafe is open till late hours - e.g. 2 am
+
+          setHourAndMinutes(to, elem, 24);
         } else {
-          $(elem).css("width", (to - 6) * 5 + "%");
+          // case: cafe is open "normal" and closed before mid.
 
-          $(elem).html("<span>" + to + ":00</span>");
+          setHourAndMinutes(to, elem, to);
         }
-        // console.log(to);
       }
     });
   };
