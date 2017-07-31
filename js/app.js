@@ -5,7 +5,7 @@ import moduleDistance from './distance.js';
 import moduleInitMap from './initMap.js';
 import moduleGeocodeMyAddress from './geocodeMyAddress.js';
 import moduleSortCafes from './sortCafes.js';
-import moduleSetCafesInfo from './setNamesetAddress.js';
+import moduleSetCafesInfo from './setCafesInfo.js';
 import moduleMyMarker from './myMarker.js';
 import moduleCafeMarker from './cafeMarker.js';
     const enter = 13;
