@@ -24,17 +24,14 @@ let moduleFirebase = (function() {
 
         let _random = Math.round(Math.random()*(snap.val().length-4));
         let markers =[];
+
         $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
-
-            $(elem).text(snap.val()[_random+i].name);
-
             let latLng = {
                 lat : function() {return snap.val()[_random+i].geo.lat},
                 lng : function() {return snap.val()[_random+i].geo.lng}
             }
-
             let name = snap.val()[_random+i].name;
-
+            $(elem).text(snap.val()[_random+i].name);
             markers.push(moduleCafeMarker.setCafeMarker(latLng , map , name));
 
             $('#find').on('click' , (event) => {

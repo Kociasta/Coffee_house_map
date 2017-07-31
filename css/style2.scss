@@ -43,7 +43,8 @@ header {
 .content {
   .cafes {
     article {
-      height: 20%;
+      font-size: 14px;
+      height: 8em;
       border-radius: 2px;
       line-height: 1.2em;
       .cafe-name {
@@ -99,7 +100,22 @@ header {
             padding-right: 2px;
           }
         }
+
       }
+
+      .cafe-icons {
+        // border: 1px solid red;
+        display: flex;
+        align-items: center;
+        // justify-content: flex-start;
+        padding: 0.2em;
+        img{
+          width: 1.8em;
+          height: 1.8em;
+          padding: 0.2em;
+        }
+      }
+
     }
   }
   .map {

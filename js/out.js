@@ -5036,11 +5036,9 @@ var moduleFirebase = function () {
 
       var _random = Math.round(Math.random() * (snap.val().length - 4));
       var markers = [];
+
       $(".cafe-name").each(function (i, elem) {
         // find elements with class cafe-name
-
-        $(elem).text(snap.val()[_random + i].name);
-
         var latLng = {
           lat: function lat() {
             return snap.val()[_random + i].geo.lat;
@@ -5049,9 +5047,8 @@ var moduleFirebase = function () {
             return snap.val()[_random + i].geo.lng;
           }
         };
-
         var name = snap.val()[_random + i].name;
-
+        $(elem).text(snap.val()[_random + i].name);
         markers.push(_cafeMarker2.default.setCafeMarker(latLng, map, name));
 
         $('#find').on('click', function (event) {
@@ -11821,6 +11818,7 @@ var second = function () {
 
               var _loop = function _loop(i) {
                 markersCafes.push(_cafeMarker2.default.setCafeMarker(allCafes[i][0], map, allCafes[i][1].name()));
+
                 markersCafes[i].addListener('mouseover', function () {
                   infowindow.setContent(markersCafes[i].title);
                   infowindow.open(map, markersCafes[i]);
@@ -11866,7 +11864,16 @@ var second = function () {
             markersMy = [];
             markersCafes = [];
             infowindow = new google.maps.InfoWindow();
-
+            //
+            // function onLoad() {
+            //
+            //   let _all = moduleFirebase.coffeeAddress();
+            //   // console.log(_allCafes);
+            //   for(let i = 0 ; i<4 ; i++){
+            //     markersMy.push(moduleCafeMarker.setCafeMarker(_all[i][0] , map , _all[i][1].name() ));
+            //   }
+            //   console.log(markersMy);
+            // }
 
             //EVENTS
             $('html').on("keyup", function (event) {
@@ -11878,6 +11885,10 @@ var second = function () {
             $('#find').on('click', function (event) {
               findCafes();
             });
+
+            // $('.title').on('click' , (event) => {
+            //   onLoad();
+            // });
 
             $('article').on("click", function (event) {
               event.preventDefault();
@@ -12010,7 +12021,7 @@ exports = module.exports = __webpack_require__(330)(undefined);
 
 
 // module
-exports.push([module.i, "/* varaibles use in project */\n/* units */\n/*simple reset, fonts, box-sizing*/\n* {\n  margin: 0;\n  padding: 0;\n  font-family: 'Lato', sans-serif;\n  box-sizing: border-box; }\n\n.hidden {\n  display: none; }\n\n/*grid , heights , widths , flexbox  */\n.container {\n  height: 100vh;\n  width: 100vw;\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: 6% 6% auto 4%; }\n\n/*\n_______________________________________________\n|_____________|______6%________|_______________|  .first\n|_____________|______6%________|_______________|  .second\n|             |                |               |  .third\n|             |                |               |\n|             |      auto      |               |\n|             |                |               |\n|_____________|________________|_______________|\n|_____________|______6%________|_______________|  .forth\n\n*/\n.first {\n  grid-column: 1 / 4;\n  grid-row: 1; }\n  .first .title {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n\n.second {\n  grid-column: 1 / 4;\n  grid-row: 2; }\n  .second .filters {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n    .second .filters #labelWhere {\n      min-width: max-content; }\n    .second .filters #where {\n      height: 100%;\n      width: 18em; }\n    .second .filters #find {\n      height: 100%;\n      width: 2em; }\n\n.third {\n  grid-column: 1 / 4;\n  grid-row: 3; }\n  .third .content {\n    display: grid;\n    grid-template-columns: repeat(5, minmax(max-content, 1fr));\n    grid-template-rows: repeat(5, 1fr);\n    height: 100%; }\n    .third .content .cafes {\n      display: none; }\n    .third .content .map {\n      grid-column: 1 / 6;\n      grid-row: 1/7; }\n      .third .content .map #map {\n        height: 100%;\n        width: 100%; }\n\n.forth {\n  grid-column: 1 / 4;\n  grid-row: 4;\n  background-color: #f2786a;\n  display: grid;\n  grid-template-columns: repeat(3, minmax(max-content, 1fr));\n  grid-template-rows: 1fr;\n  height: 100%; }\n  .forth .media {\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n    .forth .media img {\n      width: 1em;\n      height: 1em; }\n  .forth .title-small {\n    display: none; }\n\n@media screen and (min-width: 600px) {\n  .third .content .cafes {\n    display: flex;\n    flex-direction: column;\n    grid-column: 1 / 2;\n    grid-row: 1 / 6;\n    z-index: 1; }\n  .forth .title-small {\n    display: inline-block;\n    justify-self: right; } }\n\n/* every padding in the project*/\nheader .title {\n  padding-left: 2rem; }\n\n.filters #labelWhere {\n  padding-left: 2rem;\n  padding-right: 1em; }\n\n.filters #where {\n  padding-left: 1em; }\n\n.content .cafes {\n  padding: 0.5em; }\n  .content .cafes article {\n    padding: 1em; }\n\nfooter .copy {\n  padding-left: 1em; }\n\nfooter .media a {\n  padding-left: 1em;\n  padding-right: 1em; }\n\nfooter .title-small {\n  padding-right: 1em; }\n\n/* set all colours and borders */\nheader {\n  background-color: #f2786a; }\n  header .title {\n    color: #ad2c2c; }\n    header .title span:last-child {\n      color: #f2786a;\n      text-shadow: -1px 0 #ad2c2c, 0 1px #ad2c2c, 1px 0 #ad2c2c, 0 -1px #ad2c2c; }\n\n.filters {\n  background-color: #ffb752; }\n  .filters #labelWhere {\n    color: #f8f8f7; }\n  .filters #where {\n    background-color: #f1f1f1; }\n  .filters #find {\n    background-color: #784754;\n    color: #e8e8e8; }\n\n.content .cafes article {\n  background-color: #f1f1f1;\n  border: 5px solid #e8e8e8; }\n  .content .cafes article .cafe-name {\n    color: #555555; }\n  .content .cafes article .cafe-address {\n    color: #aaaaaa; }\n\nfooter {\n  color: #ad2c2c; }\n\nheader .title {\n  font-size: 20px;\n  text-transform: uppercase; }\n  header .title span:last-child {\n    font-weight: bold; }\n\n.filters {\n  text-transform: uppercase; }\n  .filters #where {\n    font-size: 14px;\n    text-transform: uppercase;\n    border: 0; }\n    .filters #where:focus {\n      outline-style: none;\n      border: 0; }\n  .filters #find {\n    font-size: 30px;\n    border: 0; }\n\n.content .cafes article {\n  height: 20%;\n  border-radius: 2px;\n  line-height: 1.2em; }\n  .content .cafes article .cafe-hours {\n    margin-top: 0.3em;\n    width: 100%;\n    height: 1.5em;\n    border-radius: 3px;\n    background-color: #ffb752;\n    position: relative;\n    color: #555555; }\n    .content .cafes article .cafe-hours .cafe-hours-from {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #ffb752;\n      position: absolute;\n      display: flex;\n      z-index: 2; }\n      .content .cafes article .cafe-hours .cafe-hours-from span {\n        position: absolute;\n        right: -28px;\n        font-size: 10px;\n        text-align: right;\n        padding-right: 2px; }\n      .content .cafes article .cafe-hours .cafe-hours-from .closed {\n        justify-content: center;\n        text-align: center; }\n    .content .cafes article .cafe-hours .cafe-hours-to {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #e8e8e8;\n      position: absolute;\n      z-index: 1;\n      display: flex;\n      justify-content: flex-end; }\n      .content .cafes article .cafe-hours .cafe-hours-to span {\n        font-size: 10px;\n        padding-right: 2px; }\n", ""]);
+exports.push([module.i, "/* varaibles use in project */\n/* units */\n/*simple reset, fonts, box-sizing*/\n* {\n  margin: 0;\n  padding: 0;\n  font-family: 'Lato', sans-serif;\n  box-sizing: border-box; }\n\n.hidden {\n  display: none; }\n\n/*grid , heights , widths , flexbox  */\n.container {\n  height: 100vh;\n  width: 100vw;\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: 6% 6% auto 4%; }\n\n/*\n_______________________________________________\n|_____________|______6%________|_______________|  .first\n|_____________|______6%________|_______________|  .second\n|             |                |               |  .third\n|             |                |               |\n|             |      auto      |               |\n|             |                |               |\n|_____________|________________|_______________|\n|_____________|______6%________|_______________|  .forth\n\n*/\n.first {\n  grid-column: 1 / 4;\n  grid-row: 1; }\n  .first .title {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n\n.second {\n  grid-column: 1 / 4;\n  grid-row: 2; }\n  .second .filters {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n    .second .filters #labelWhere {\n      min-width: max-content; }\n    .second .filters #where {\n      height: 100%;\n      width: 18em; }\n    .second .filters #find {\n      height: 100%;\n      width: 2em; }\n\n.third {\n  grid-column: 1 / 4;\n  grid-row: 3; }\n  .third .content {\n    display: grid;\n    grid-template-columns: repeat(5, minmax(max-content, 1fr));\n    grid-template-rows: repeat(5, 1fr);\n    height: 100%; }\n    .third .content .cafes {\n      display: none; }\n    .third .content .map {\n      grid-column: 1 / 6;\n      grid-row: 1/7; }\n      .third .content .map #map {\n        height: 100%;\n        width: 100%; }\n\n.forth {\n  grid-column: 1 / 4;\n  grid-row: 4;\n  background-color: #f2786a;\n  display: grid;\n  grid-template-columns: repeat(3, minmax(max-content, 1fr));\n  grid-template-rows: 1fr;\n  height: 100%; }\n  .forth .media {\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n    .forth .media img {\n      width: 1em;\n      height: 1em; }\n  .forth .title-small {\n    display: none; }\n\n@media screen and (min-width: 600px) {\n  .third .content .cafes {\n    display: flex;\n    flex-direction: column;\n    grid-column: 1 / 2;\n    grid-row: 1 / 6;\n    z-index: 1; }\n  .forth .title-small {\n    display: inline-block;\n    justify-self: right; } }\n\n/* every padding in the project*/\nheader .title {\n  padding-left: 2rem; }\n\n.filters #labelWhere {\n  padding-left: 2rem;\n  padding-right: 1em; }\n\n.filters #where {\n  padding-left: 1em; }\n\n.content .cafes {\n  padding: 0.5em; }\n  .content .cafes article {\n    padding: 1em; }\n\nfooter .copy {\n  padding-left: 1em; }\n\nfooter .media a {\n  padding-left: 1em;\n  padding-right: 1em; }\n\nfooter .title-small {\n  padding-right: 1em; }\n\n/* set all colours and borders */\nheader {\n  background-color: #f2786a; }\n  header .title {\n    color: #ad2c2c; }\n    header .title span:last-child {\n      color: #f2786a;\n      text-shadow: -1px 0 #ad2c2c, 0 1px #ad2c2c, 1px 0 #ad2c2c, 0 -1px #ad2c2c; }\n\n.filters {\n  background-color: #ffb752; }\n  .filters #labelWhere {\n    color: #f8f8f7; }\n  .filters #where {\n    background-color: #f1f1f1; }\n  .filters #find {\n    background-color: #784754;\n    color: #e8e8e8; }\n\n.content .cafes article {\n  background-color: #f1f1f1;\n  border: 5px solid #e8e8e8; }\n  .content .cafes article .cafe-name {\n    color: #555555; }\n  .content .cafes article .cafe-address {\n    color: #aaaaaa; }\n\nfooter {\n  color: #ad2c2c; }\n\nheader .title {\n  font-size: 20px;\n  text-transform: uppercase; }\n  header .title span:last-child {\n    font-weight: bold; }\n\n.filters {\n  text-transform: uppercase; }\n  .filters #where {\n    font-size: 14px;\n    text-transform: uppercase;\n    border: 0; }\n    .filters #where:focus {\n      outline-style: none;\n      border: 0; }\n  .filters #find {\n    font-size: 30px;\n    border: 0; }\n\n.content .cafes article {\n  font-size: 14px;\n  height: 8em;\n  border-radius: 2px;\n  line-height: 1.2em; }\n  .content .cafes article .cafe-hours {\n    margin-top: 0.3em;\n    width: 100%;\n    height: 1.5em;\n    border-radius: 3px;\n    background-color: #ffb752;\n    position: relative;\n    color: #555555; }\n    .content .cafes article .cafe-hours .cafe-hours-from {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #ffb752;\n      position: absolute;\n      display: flex;\n      z-index: 2; }\n      .content .cafes article .cafe-hours .cafe-hours-from span {\n        position: absolute;\n        right: -28px;\n        font-size: 10px;\n        text-align: right;\n        padding-right: 2px; }\n      .content .cafes article .cafe-hours .cafe-hours-from .closed {\n        justify-content: center;\n        text-align: center; }\n    .content .cafes article .cafe-hours .cafe-hours-to {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #e8e8e8;\n      position: absolute;\n      z-index: 1;\n      display: flex;\n      justify-content: flex-end; }\n      .content .cafes article .cafe-hours .cafe-hours-to span {\n        font-size: 10px;\n        padding-right: 2px; }\n  .content .cafes article .cafe-icons {\n    display: flex;\n    align-items: center;\n    padding: 0.2em; }\n    .content .cafes article .cafe-icons img {\n      width: 1.8em;\n      height: 1.8em;\n      padding: 0.2em; }\n", ""]);
 
 // exports
 
