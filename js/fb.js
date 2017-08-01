@@ -68,7 +68,8 @@ let moduleFirebase = (function() {
                           {
                             name: function(){ return snap.val()[i].name},
                             adress: function(){ return snap.val()[i].adress},
-                            hours: function(){ return snap.val()[i].hours}
+                            hours: function(){ return snap.val()[i].hours},
+                            icons: function(){return snap.val()[i].desc},
                           },
                         ]
               )

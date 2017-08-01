@@ -5093,6 +5093,9 @@ var moduleFirebase = function () {
           },
           hours: function hours() {
             return snap.val()[i].hours;
+          },
+          icons: function icons() {
+            return snap.val()[i].desc;
           }
         }]);
       };
@@ -18156,6 +18159,34 @@ var moduleSetCafesInfo = function (allCafes) {
           setHourAndMinutes(to, elem, to);
         }
       }
+    });
+
+    var icons = ["slice1.png", "slice2.png", "slice3.png", "slice4.png", "slice5.png"];
+
+    $(".cafe-icons").each(function (i, elem) {
+      //
+      var cafeIcons = allCafes[i][1].icons().split(" ");
+      $(elem).html("");
+      $(cafeIcons).each(function (i, ico) {
+
+        switch (ico) {
+          case "[a]":
+            $(elem).append("<img class=\"" + ico + "\" src=\"./img/icons/" + icons[0] + "\" alt=\"" + ico + "\">");
+            break;
+          case "[e]":
+            $(elem).append("<img src='./img/icons/" + icons[1] + "'>");
+            break;
+          case "[fresh]":
+            $(elem).append("<img src='./img/icons/" + icons[2] + "'>");
+            break;
+          case "[100%]":
+            $(elem).append("<img src='./img/icons/" + icons[3] + "'>");
+            break;
+          case "[lokal]":
+            $(elem).append("<img src='./img/icons/" + icons[4] + "'>");
+            break;
+        }
+      });
     });
   };
 
