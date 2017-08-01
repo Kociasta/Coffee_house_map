@@ -1,0 +1,34 @@
+
+.invisible {
+  display: flex; /*na flex*/
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  background-color: rgba($color-main-grey , 0.7);
+
+  .banner {
+    width: 30vw;
+    height: 30vh;
+    border-radius: 3px;
+    border: 1px solid $color-button;
+    background-color: rgba($color-button, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 120%;
+      font-weight: 300;
+      display: inline-block;
+      width: 80%;
+      text-align: left;
+      color: $color-main-yellow;
+    }
+  }
+}

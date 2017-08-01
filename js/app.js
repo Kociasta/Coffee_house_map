@@ -20,6 +20,7 @@ import moduleCafeMarker from './cafeMarker.js';
       map = moduleInitMap.map();
       geocoder = moduleInitMap.geocoder();
 
+
       moduleFirebase.setName(map); // set name of Cafe and address - random
 
     }
@@ -74,13 +75,13 @@ import moduleCafeMarker from './cafeMarker.js';
         for(let i = 0 ; i<4 ; i++){
           markersCafes.push(moduleCafeMarker.setCafeMarker(allCafes[i][0] , map , allCafes[i][1].name() ) );
 
-          markersCafes[i].addListener('mouseover', function() {
-    	        infowindow.setContent(markersCafes[i].title);
-              infowindow.open(map, markersCafes[i]);
-          });
-          markersCafes[i].addListener('mouseout', function() {
-            infowindow.close(map, markersCafes[i]);
-          });
+          // markersCafes[i].addListener('mouseover', function() {
+    	    //     infowindow.setContent(markersCafes[i].title);
+          //     infowindow.open(map, markersCafes[i]);
+          // });
+          // markersCafes[i].addListener('mouseout', function() {
+          //   infowindow.close(map, markersCafes[i]);
+          // });
 
         }
 
@@ -92,6 +93,21 @@ import moduleCafeMarker from './cafeMarker.js';
       }
 
       //EVENTS
+      if( $(".invisible").css("display") === "flex" ){
+        $('html').on("keyup" , (event) => {
+          if(event.keyCode == enter ){
+            $(".invisible").css("display" , "none");
+
+          }
+        });
+
+        $('.invisible').on('click' , (event) => {
+          $(".invisible").css("display" , "none");
+          findCafes();
+        });
+      }
+      // ............................................
+
       $('html').on("keyup" , (event) => {
         if(event.keyCode == enter){
           findCafes();
@@ -113,6 +129,7 @@ import moduleCafeMarker from './cafeMarker.js';
         // I use this instead of event.target because this point to article and even.target can point to div with name and address - and it has no id
         markersCafes[this.id].setAnimation(google.maps.Animation.BOUNCE);
       });
+
 
 
     }

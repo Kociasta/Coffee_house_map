@@ -34,7 +34,12 @@ let moduleFirebase = (function() {
             $(elem).text(snap.val()[_random+i].name);
             markers.push(moduleCafeMarker.setCafeMarker(latLng , map , name));
 
-            $('#find').on('click' , (event) => {
+            // $('#find').on('click' , (event) => {
+            //     for(let i = 0 ; i<4 ; i++){
+            //       markers[i].setMap(null);
+            //     }
+            // });
+            $('.invisible').on('click' , (event) => {
                 for(let i = 0 ; i<4 ; i++){
                   markers[i].setMap(null);
                 }
