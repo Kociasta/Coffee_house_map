@@ -3,7 +3,7 @@ import moduleCafeMarker from './cafeMarker.js';
 
 let moduleFirebase = (function() {
 
-    let param = [];
+    let _param = [];
     // variable with config data to get to Firebase
     const _config = {
         apiKey: "AIzaSyA0PL06i_Fdi70FkUxOo4I9JToVS-632U8",
@@ -18,27 +18,35 @@ let moduleFirebase = (function() {
     let _fb = Firebase.initializeApp(_config);
     let _db = _fb.database().ref();
 
-    // set text to name from firebase set adresses from firebase (to the next elems)
-    let _setName = function(map) {
+    // set .cafe-name to name from firebase, set addresses from firebase (to the next elems), create and close markers
+    let _setIntroName = function(map) {
       _db.on('value' , (snap) => {
 
-        let _random = Math.round(Math.random()*(snap.val().length-4));
+        //every load of page the number "random" is generated
+        //4 cafes are semi-random because 1-st of them is really random and others are its neighbours (in database)
+        //e.g. random = 4 , cafes that appear on page are 4,5,6 and 7 position from database
+
+        let random = Math.round(Math.random()*(snap.val().length-4)); // -4 -> because of 4 cafes
         let markers =[];
-
-        $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
+        // set markers
+        $(".cafe-name").each((i , elem) => {
+            // making  object latLng
             let latLng = {
-                lat : function() {return snap.val()[_random+i].geo.lat},
-                lng : function() {return snap.val()[_random+i].geo.lng}
+                lat : function() {return snap.val()[random+i].geo.lat},
+                lng : function() {return snap.val()[random+i].geo.lng}
             }
-            let name = snap.val()[_random+i].name;
-            $(elem).text(snap.val()[_random+i].name);
-            markers.push(moduleCafeMarker.setCafeMarker(latLng , map , name));
 
-            // $('#find').on('click' , (event) => {
-            //     for(let i = 0 ; i<4 ; i++){
-            //       markers[i].setMap(null);
-            //     }
-            // });
+            let name = snap.val()[random+i].name;
+            let address = snap.val()[random+i].adress;
+
+            // set cafe-name
+            $(elem).text(name);
+            // create markers
+            markers.push(moduleCafeMarker.setCafeMarker(latLng , map , name));
+            //set cafe-address
+            $(elem).next().text("ul. " + address);
+
+            //EVENTS - to close markers
             $('.invisible').on('click' , (event) => {
                 for(let i = 0 ; i<4 ; i++){
                   markers[i].setMap(null);
@@ -53,20 +61,15 @@ let moduleFirebase = (function() {
             });
         });
 
-        $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
-          $(elem).next().text("ul. " + snap.val()[_random+i].adress);
-          // console.log(_random);
-        });
-
       });
     };
 
-    // set coffeeAddress on one of the firebase cafes address
-    let _coffeeAddress =  function() {
+    // set coffeeDB on one of the firebase cafes address
+    let _coffeeDB =  function() {
       _db.on('value' , (snap) => {
 
           for(let i=0 ; i<snap.val().length ; i++){
-              param.push( [{
+              _param.push( [{
                             lat: function(){ return snap.val()[i].geo.lat},
                             lng: function(){ return snap.val()[i].geo.lng},
                           },
@@ -81,13 +84,13 @@ let moduleFirebase = (function() {
           }
 
       });
-      return param // structure: [ [{lat() , lng()},{name() , adress()}] , [{},{}] , [{},{}] , ...  ] - if I want get to adress -> moduleFirebase.coffeeAddress()[1][1].adress()
+      return _param // structure: [ [{lat() , lng()}, {name() , adress(), hours(), desc()}] , [{},{}] , [{},{}] , ...  ] - if I want get to adress -> moduleFirebase.coffeeDB()[1][1].adress()
     };
 
 
     return {
-      setName: _setName,
-      coffeeAddress: _coffeeAddress,
+      setIntroName: _setIntroName,
+      coffeeDB: _coffeeDB,
     }
 
 })();
