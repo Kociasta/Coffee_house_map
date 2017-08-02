@@ -11808,7 +11808,7 @@ var first = function () {
 
 var second = function () {
   var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var allCafes, markersMy, markersCafes, infowindow, findCafes, onGeocoded;
+    var allCafes, markersMy, markersCafes, findCafes, onGeocoded;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -11859,7 +11859,6 @@ var second = function () {
             allCafes = void 0;
             markersMy = [];
             markersCafes = [];
-            infowindow = new google.maps.InfoWindow();
 
 
             //EVENTS
@@ -11897,7 +11896,7 @@ var second = function () {
               markersCafes[this.id].setAnimation(google.maps.Animation.BOUNCE);
             });
 
-          case 12:
+          case 11:
           case 'end':
             return _context2.stop();
         }
@@ -17990,6 +17989,7 @@ exports.default = moduleInitMap;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+//******************************************************************************
 var moduleGeocodeMyAddress = function () {
 
   var _myAddressLatLng = void 0;
@@ -17999,7 +17999,12 @@ var moduleGeocodeMyAddress = function () {
       if (status === 'OK') {
 
         _myAddressLatLng = results[0].geometry.location;
+        // pass on lat and lng to callback function
         callback(_myAddressLatLng);
+
+        // errors
+      } else if (status === 'ZERO_RESULTS') {
+        alert('Brak miejsca o takiej nazwie - wpisz poprawną nazwę.');
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }

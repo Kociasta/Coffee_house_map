@@ -29,7 +29,6 @@ import moduleCafeMarker from './cafeMarker.js';
       let allCafes;
       let markersMy = [];
       let markersCafes = [];
-      let infowindow = new google.maps.InfoWindow();
 
       function findCafes() {
         allCafes = null; // it could not be here

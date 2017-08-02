@@ -1,3 +1,4 @@
+//******************************************************************************
 let moduleGeocodeMyAddress = (
   function() {
 
@@ -8,9 +9,13 @@ let moduleGeocodeMyAddress = (
           if (status === 'OK') {
 
             _myAddressLatLng = results[0].geometry.location;
-            callback(_myAddressLatLng)
+            // pass on lat and lng to callback function
+            callback(_myAddressLatLng);
 
-          }else {
+          // errors
+          } else if(status === 'ZERO_RESULTS'){
+            alert('Brak miejsca o takiej nazwie - wpisz poprawną nazwę.');
+          } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
 
