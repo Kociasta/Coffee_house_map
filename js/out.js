@@ -11840,7 +11840,7 @@ var second = function () {
               // clearing input value
               $('#where').val(" ");
 
-              // if arrays are not empty - remove markers
+              // if arrays are not empty - remove all markers
               if (markersMy[0] && markersCafes[0]) {
                 markersMy[0].setMap(null);
                 for (var i = 0; i < 4; i++) {
@@ -11857,9 +11857,9 @@ var second = function () {
 
           case 4:
             allCafes = void 0;
-            markersMy = [];
-            markersCafes = [];
+            markersMy = []; // my position
 
+            markersCafes = []; // positions of cafes
 
             //EVENTS
             if ($(".invisible").css("display") === "flex") {
@@ -18277,15 +18277,18 @@ exports.default = getHours;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
+//*****************************************************************************
 var moduleMyMarker = function () {
 
   var _setMyMarker = function _setMyMarker(latLng, map) {
+
+    // centre the map
     map.setCenter(latLng);
+
+    // create my position marker
     var marker = new google.maps.Marker({
       map: map,
       position: latLng,
-
       icon: 'img/icons/slice6.png'
 
     });
@@ -18299,6 +18302,8 @@ var moduleMyMarker = function () {
 }();
 
 exports.default = moduleMyMarker;
+
+// this module set map centre at latLng and return marker of my position
 
 /***/ })
 /******/ ]);

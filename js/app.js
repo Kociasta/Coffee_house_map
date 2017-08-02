@@ -28,8 +28,9 @@ import moduleCafeMarker from './cafeMarker.js';
       await first();
 
       let allCafes;
-      let markersMy = [];
-      let markersCafes = [];
+
+      let markersMy = []; // my position
+      let markersCafes = []; // positions of cafes
 
       function findCafes() {
         allCafes = null; // it could not be here
@@ -37,7 +38,7 @@ import moduleCafeMarker from './cafeMarker.js';
         // clearing input value
         $('#where').val(" ") ;
 
-        // if arrays are not empty - remove markers
+        // if arrays are not empty - remove all markers
         if(markersMy[0] && markersCafes[0]){
           markersMy[0].setMap(null);
           for(let i = 0 ; i<4 ; i++){
