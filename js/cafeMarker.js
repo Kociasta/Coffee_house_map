@@ -1,7 +1,5 @@
-
+//******************************************************************************
 let moduleCafeMarker = (function(){
-
-  // let infowindow = new google.maps.InfoWindow();
 
   let _setMyMarker = function(latLng , map , name){
 
@@ -22,3 +20,5 @@ let moduleCafeMarker = (function(){
 })();
 
 export default moduleCafeMarker;
+
+// this module return marker and set it on latLng position -> moduleCafeMarker.setCafeMarker(latLng , map , name)

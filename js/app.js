@@ -59,12 +59,16 @@ import moduleCafeMarker from './cafeMarker.js';
 
         // sorting data in distance order
         sortedAllCafes = moduleSortCafes.sortedAllCafes(resultLatLng);
-        // setting Name i Address in HTML (nearest)
+
+        // setting Name i Address in HTML (4 nearest to my position)
         moduleSetCafesInfo.setCafesInfo(sortedAllCafes);
 
         // make MARKERS of nearest Cafes
         for(let i = 0 ; i<4 ; i++){
-          markersCafes.push(moduleCafeMarker.setCafeMarker(sortedAllCafes[i][0] , map , sortedAllCafes[i][1].name() ) );
+          let markerLatLng = sortedAllCafes[i][0];
+          let markerName = sortedAllCafes[i][1].name();
+          
+          markersCafes.push(moduleCafeMarker.setCafeMarker(markerLatLng , map , markerName ) );
         }
 
         //delete last elem of each cafe - which is counted distance

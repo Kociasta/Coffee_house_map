@@ -6832,10 +6832,8 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
+//******************************************************************************
 var moduleCafeMarker = function () {
-
-  // let infowindow = new google.maps.InfoWindow();
 
   var _setMyMarker = function _setMyMarker(latLng, map, name) {
 
@@ -6855,6 +6853,8 @@ var moduleCafeMarker = function () {
 }();
 
 exports.default = moduleCafeMarker;
+
+// this module return marker and set it on latLng position -> moduleCafeMarker.setCafeMarker(latLng , map , name)
 
 /***/ }),
 /* 142 */
@@ -11820,12 +11820,16 @@ var second = function () {
 
               // sorting data in distance order
               sortedAllCafes = _sortCafes2.default.sortedAllCafes(resultLatLng);
-              // setting Name i Address in HTML (nearest)
+
+              // setting Name i Address in HTML (4 nearest to my position)
               _setCafesInfo2.default.setCafesInfo(sortedAllCafes);
 
               // make MARKERS of nearest Cafes
               for (var i = 0; i < 4; i++) {
-                markersCafes.push(_cafeMarker2.default.setCafeMarker(sortedAllCafes[i][0], map, sortedAllCafes[i][1].name()));
+                var markerLatLng = sortedAllCafes[i][0];
+                var markerName = sortedAllCafes[i][1].name();
+
+                markersCafes.push(_cafeMarker2.default.setCafeMarker(markerLatLng, map, markerName));
               }
 
               //delete last elem of each cafe - which is counted distance
