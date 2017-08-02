@@ -26,7 +26,7 @@ let moduleSortCafes = (function(resultLatLng) {
 
 })();
 
-
-
-
 export default moduleSortCafes;
+
+
+// this module return useful info from database - sorted in from-my-position distance

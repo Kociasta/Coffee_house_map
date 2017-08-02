@@ -18076,6 +18076,8 @@ var moduleSortCafes = function (resultLatLng) {
 
 exports.default = moduleSortCafes;
 
+// this module return useful info from database - sorted in from-my-position distance
+
 /***/ }),
 /* 367 */
 /***/ (function(module, exports, __webpack_require__) {
