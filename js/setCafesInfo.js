@@ -3,34 +3,44 @@ import getHours from './hours.js';
 let moduleSetCafesInfo = (function(allCafes) {
 
   let setHourAndMinutes = function (when , elem , myWidth) {
-    if(when.length === 1 || when.length === 2 ){
+    let whenRound; // hours in decimal system
+
+    if(when.length === 1 || when.length === 2 ){  // case: opening hours without minutes
       $(elem).css("width" , `${(parseInt( myWidth ,10)-6)*5}%`);
       $(elem).html(`<span>${when} <sup>00</sup> </span>`);
-    } else{
+    } else{                                      // case: opening hours with minutes
       let min;
       if(when.length === 4){ // case 1-digit hour
         min = when[2] + when[3]; //return string made of 2 numbers e.g. from[2]=3, from[3]=0 -> min=30
+        whenRound = parseInt(when,10)+ parseInt((min),10)/60;
       } else if(when.length === 5) { // case 2-digits hour
         min = when[3] + when[4];
+        whenRound = parseInt(when,10)+ parseInt((min),10)/60;
       }
-      $(elem).css("width" , `${(parseInt(when,10)-6)*5}%`); // parse only 1st number e.g. 7:30 -> 7
-      $(elem).html(`<span>${parseInt(when,10)}<sup>${min}</sup></span>`);
+      // formula for setting stripe width : ( when - 6 )*5
+      // total width of stripe .cafe-fours is 100% - it is split to 20 parts - 5% is 1 hour - starts from 5am - ends at 1am, 5% is for margins from left and right - so actual start hour is 6am and end - midnight
+      //exmaple : when=9 , 9-6=3 , 3*5% = 15% - the .cafe-hours-from stripe has 15%width (+5% margins)
+
+      $(elem).css("width" , `${(whenRound-6)*5}%`);
+      $(elem).html(`<span>${parseInt(when,10)}<sup>${min}</sup></span>`); // parse only 1st number e.g. 7:30 -> 7
     }
   }
 
   let _setCafeInfo = function(allCafes){
 
-    $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
+    // set cafe name
+    $(".cafe-name").each((i , elem) => {
         $(elem).text(allCafes[i][1].name);
     });
-    $(".cafe-name").each((i , elem) => { // find elements with class cafe-name
+    // set cafe address
+    $(".cafe-name").each((i , elem) => {
         $(elem).next().text(allCafes[i][1].adress);
     });
 
-    // here - changing hours
-    $(".cafe-hours-from").each((i , elem) => { // find elements with class cafe-hours-from
+    // set opening hours (width of stripe + text)
+    $(".cafe-hours-from").each((i , elem) => {
 
-      if(getHours(allCafes[i]).from === "") { // if this day cafe is closed
+      if(getHours(allCafes[i]).from === "") { // if today is closed
 
         $(elem).html(`<span class="closed">ZAMKNIĘTE</span>`);
         $(elem).css("width" , `50%`);
@@ -38,13 +48,13 @@ let moduleSetCafesInfo = (function(allCafes) {
       } else {                               // if it is open
 
         let from = getHours(allCafes[i]).from ; // 2 type of data in base -> "8" or "7:30"
-
         setHourAndMinutes(from , elem , from);
 
       }
     });
 
-    $(".cafe-hours-to").each((i , elem) => { // find elements with class cafe-hours-to
+    //set close hours (width of stripe + text)
+    $(".cafe-hours-to").each((i , elem) => {
 
       if(getHours(allCafes[i]).to === "") { // if cafe is closed
 
@@ -54,7 +64,6 @@ let moduleSetCafesInfo = (function(allCafes) {
       } else {                              // if cafe is open
 
         let to = getHours(allCafes[i]).to;
-
         if(parseInt(to,10) < 16) { // case: cafe is open till late hours - e.g. 2 am
 
           setHourAndMinutes(to , elem , 24);
@@ -68,28 +77,49 @@ let moduleSetCafesInfo = (function(allCafes) {
 
     });
 
-    let icons = ["slice1.png","slice2.png","slice3.png","slice4.png","slice5.png"];
+    // set actual time on .cafe-hours stripe --> in scss class .hour
+    $(".cafe-hours").each((i , elem)=>{
 
-    $(".cafe-icons").each((i , elem) => {  //
+      let min = new Date().getMinutes(); // actual time - min
+      let hour = new Date().getHours(); // actual time - hour
+
+      let time = Math.round((hour + (min)/60)*1000)/1000;
+      //example: hours=8 , min=30 -> time = 8.5 , *1000/1000 - 3 decimal  round
+
+      if(time >= 5 && time <= 24){ // show time only form 5 to 24
+        $(elem).append(`<div class="hour" style="left: ${(time-6)*5+5}%">  </div>`);
+      }
+
+    });
+
+
+    // set description (icons)
+    $(".cafe-icons").each((i , elem) => {
+
+      //all icons
+      let icons = ["slice1.png","slice2.png","slice3.png","slice4.png","slice5.png"];
+      let path = "./img/icons/";
+      
+      // get description from datebase
       let cafeIcons = allCafes[i][1].icons().split(" ");
       $(elem).html("");
       $(cafeIcons).each((i , ico)=>{
 
         switch(ico) {
           case "[a]":
-            $(elem).append(`<img class="${ico}" src="./img/icons/${icons[0]}" alt="${ico}">`);
+            $(elem).append(`<img class="${ico}" src="${path+icons[0]}" alt="${ico}">`);
             break;
           case "[e]":
-            $(elem).append(`<img src='./img/icons/${icons[1]}'>`);
+            $(elem).append(`<img src='${path+icons[1]}' alt="${ico}">`);
             break;
           case "[fresh]":
-            $(elem).append(`<img src='./img/icons/${icons[2]}'>`);
+            $(elem).append(`<img src='${path+icons[2]}' alt="${ico}">`);
             break;
           case "[100%]":
-            $(elem).append(`<img src='./img/icons/${icons[3]}'>`);
+            $(elem).append(`<img src='${path+icons[3]}' alt="${ico}">`);
             break;
           case "[lokal]":
-            $(elem).append(`<img src='./img/icons/${icons[4]}'>`);
+            $(elem).append(`<img src='${path+icons[4]}' alt="${ico}">`);
             break;
         }
       });

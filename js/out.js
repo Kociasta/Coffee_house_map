@@ -12038,7 +12038,7 @@ exports = module.exports = __webpack_require__(330)(undefined);
 
 
 // module
-exports.push([module.i, "/* varaibles use in project */\n/* units */\n/*simple reset, fonts, box-sizing*/\n* {\n  margin: 0;\n  padding: 0;\n  font-family: 'Lato', sans-serif;\n  box-sizing: border-box; }\n\n.hidden {\n  display: none; }\n\n/*grid , heights , widths , flexbox  */\n.container {\n  height: 100vh;\n  width: 100vw;\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: 6% 6% auto 4%; }\n\n/*\n_______________________________________________\n|_____________|______6%________|_______________|  .first\n|_____________|______6%________|_______________|  .second\n|             |                |               |  .third\n|             |                |               |\n|             |      auto      |               |\n|             |                |               |\n|_____________|________________|_______________|\n|_____________|______6%________|_______________|  .forth\n\n*/\n.first {\n  grid-column: 1 / 4;\n  grid-row: 1; }\n  .first .title {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n\n.second {\n  grid-column: 1 / 4;\n  grid-row: 2; }\n  .second .filters {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n    .second .filters #labelWhere {\n      min-width: max-content; }\n    .second .filters #where {\n      height: 100%;\n      width: 18em; }\n    .second .filters #find {\n      height: 100%;\n      width: 2em; }\n\n.third {\n  grid-column: 1 / 4;\n  grid-row: 3; }\n  .third .content {\n    display: grid;\n    grid-template-columns: repeat(5, minmax(max-content, 1fr));\n    grid-template-rows: repeat(5, 1fr);\n    height: 100%; }\n    .third .content .cafes {\n      display: none; }\n    .third .content .map {\n      grid-column: 1 / 6;\n      grid-row: 1/7; }\n      .third .content .map #map {\n        height: 100%;\n        width: 100%; }\n\n.forth {\n  grid-column: 1 / 4;\n  grid-row: 4;\n  background-color: #f2786a;\n  display: grid;\n  grid-template-columns: repeat(3, minmax(max-content, 1fr));\n  grid-template-rows: 1fr;\n  height: 100%; }\n  .forth .media {\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n    .forth .media img {\n      width: 1em;\n      height: 1em; }\n  .forth .title-small {\n    display: none; }\n\n@media screen and (min-width: 600px) {\n  .third .content .cafes {\n    display: flex;\n    flex-direction: column;\n    grid-column: 1 / 2;\n    grid-row: 1 / 6;\n    z-index: 1; }\n  .forth .title-small {\n    display: inline-block;\n    justify-self: right; } }\n\n/* every padding in the project*/\nheader .title {\n  padding-left: 2rem; }\n\n.filters #labelWhere {\n  padding-left: 2rem;\n  padding-right: 1em; }\n\n.filters #where {\n  padding-left: 1em; }\n\n.content .cafes {\n  padding: 0.5em; }\n  .content .cafes article {\n    padding: 1em; }\n\nfooter .copy {\n  padding-left: 1em; }\n\nfooter .media a {\n  padding-left: 1em;\n  padding-right: 1em; }\n\nfooter .title-small {\n  padding-right: 1em; }\n\n/* set all colours and borders */\nheader {\n  background-color: #f2786a; }\n  header .title {\n    color: #ad2c2c; }\n    header .title span:last-child {\n      color: #f2786a;\n      text-shadow: -1px 0 #ad2c2c, 0 1px #ad2c2c, 1px 0 #ad2c2c, 0 -1px #ad2c2c; }\n\n.filters {\n  background-color: #ffb752; }\n  .filters #labelWhere {\n    color: #f8f8f7; }\n  .filters #where {\n    background-color: #f1f1f1; }\n  .filters #find {\n    background-color: #784754;\n    color: #e8e8e8; }\n\n.content .cafes article {\n  background-color: #f1f1f1;\n  border: 5px solid #e8e8e8; }\n  .content .cafes article .cafe-name {\n    color: #555555; }\n  .content .cafes article .cafe-address {\n    color: #aaaaaa; }\n\nfooter {\n  color: #ad2c2c; }\n\n.invisible {\n  display: flex;\n  /*na flex*/\n  position: fixed;\n  justify-content: center;\n  align-items: center;\n  z-index: 4;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  padding: 10px;\n  background-color: rgba(241, 241, 241, 0.7); }\n  .invisible .banner {\n    width: 30vw;\n    height: 30vh;\n    border-radius: 3px;\n    border: 1px solid #784754;\n    background-color: rgba(120, 71, 84, 0.8);\n    display: flex;\n    justify-content: center;\n    align-items: center; }\n    .invisible .banner p {\n      font-size: 120%;\n      font-weight: 300;\n      display: inline-block;\n      width: 80%;\n      text-align: left;\n      color: #ffb752; }\n\nheader .title {\n  font-size: 20px;\n  text-transform: uppercase; }\n  header .title span:last-child {\n    font-weight: bold; }\n\n.filters {\n  text-transform: uppercase; }\n  .filters #where {\n    font-size: 14px;\n    text-transform: uppercase;\n    border: 0; }\n    .filters #where:focus {\n      outline-style: none;\n      border: 0; }\n  .filters #find {\n    font-size: 30px;\n    border: 0; }\n\n.content .cafes article {\n  font-size: 14px;\n  height: 8em;\n  border-radius: 2px;\n  line-height: 1.2em; }\n  .content .cafes article .cafe-hours {\n    margin-top: 0.3em;\n    width: 100%;\n    height: 1.5em;\n    border-radius: 3px;\n    background-color: #ffb752;\n    position: relative;\n    color: #555555; }\n    .content .cafes article .cafe-hours .cafe-hours-from {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #ffb752;\n      position: absolute;\n      display: flex;\n      z-index: 2; }\n      .content .cafes article .cafe-hours .cafe-hours-from span {\n        position: absolute;\n        right: -28px;\n        font-size: 10px;\n        text-align: right;\n        padding-right: 2px; }\n      .content .cafes article .cafe-hours .cafe-hours-from .closed {\n        justify-content: center;\n        text-align: center; }\n    .content .cafes article .cafe-hours .cafe-hours-to {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #e8e8e8;\n      position: absolute;\n      z-index: 1;\n      display: flex;\n      justify-content: flex-end; }\n      .content .cafes article .cafe-hours .cafe-hours-to span {\n        font-size: 10px;\n        padding-right: 2px; }\n  .content .cafes article .cafe-icons {\n    display: flex;\n    align-items: center;\n    padding: 0.2em; }\n    .content .cafes article .cafe-icons img {\n      width: 1.8em;\n      height: 1.8em;\n      padding: 0.2em; }\n", ""]);
+exports.push([module.i, "/* varaibles use in project */\n/* units */\n/*simple reset, fonts, box-sizing*/\n* {\n  margin: 0;\n  padding: 0;\n  font-family: 'Lato', sans-serif;\n  box-sizing: border-box; }\n\n.hidden {\n  display: none; }\n\n/*grid , heights , widths , flexbox  */\n.container {\n  height: 100vh;\n  width: 100vw;\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: 6% 6% auto 4%; }\n\n/*\n_______________________________________________\n|_____________|______6%________|_______________|  .first\n|_____________|______6%________|_______________|  .second\n|             |                |               |  .third\n|             |                |               |\n|             |      auto      |               |\n|             |                |               |\n|_____________|________________|_______________|\n|_____________|______6%________|_______________|  .forth\n\n*/\n.first {\n  grid-column: 1 / 4;\n  grid-row: 1; }\n  .first .title {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n\n.second {\n  grid-column: 1 / 4;\n  grid-row: 2; }\n  .second .filters {\n    height: 100%;\n    display: flex;\n    align-items: center; }\n    .second .filters #labelWhere {\n      min-width: max-content; }\n    .second .filters #where {\n      height: 100%;\n      width: 18em; }\n    .second .filters #find {\n      height: 100%;\n      width: 2em; }\n\n.third {\n  grid-column: 1 / 4;\n  grid-row: 3; }\n  .third .content {\n    display: grid;\n    grid-template-columns: repeat(5, minmax(max-content, 1fr));\n    grid-template-rows: repeat(5, 1fr);\n    height: 100%; }\n    .third .content .cafes {\n      display: none; }\n    .third .content .map {\n      grid-column: 1 / 6;\n      grid-row: 1/7; }\n      .third .content .map #map {\n        height: 100%;\n        width: 100%; }\n\n.forth {\n  grid-column: 1 / 4;\n  grid-row: 4;\n  background-color: #f2786a;\n  display: grid;\n  grid-template-columns: repeat(3, minmax(max-content, 1fr));\n  grid-template-rows: 1fr;\n  height: 100%; }\n  .forth .media {\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n    .forth .media img {\n      width: 1em;\n      height: 1em; }\n  .forth .title-small {\n    display: none; }\n\n@media screen and (min-width: 600px) {\n  .third .content .cafes {\n    display: flex;\n    flex-direction: column;\n    grid-column: 1 / 2;\n    grid-row: 1 / 6;\n    z-index: 1; }\n  .forth .title-small {\n    display: inline-block;\n    justify-self: right; } }\n\n/* every padding in the project*/\nheader .title {\n  padding-left: 2rem; }\n\n.filters #labelWhere {\n  padding-left: 2rem;\n  padding-right: 1em; }\n\n.filters #where {\n  padding-left: 1em; }\n\n.content .cafes {\n  padding: 0.5em; }\n  .content .cafes article {\n    padding: 1em; }\n\nfooter .copy {\n  padding-left: 1em; }\n\nfooter .media a {\n  padding-left: 1em;\n  padding-right: 1em; }\n\nfooter .title-small {\n  padding-right: 1em; }\n\n/* set all colours and borders */\nheader {\n  background-color: #f2786a; }\n  header .title {\n    color: #ad2c2c; }\n    header .title span:last-child {\n      color: #f2786a;\n      text-shadow: -1px 0 #ad2c2c, 0 1px #ad2c2c, 1px 0 #ad2c2c, 0 -1px #ad2c2c; }\n\n.filters {\n  background-color: #ffb752; }\n  .filters #labelWhere {\n    color: #f8f8f7; }\n  .filters #where {\n    background-color: #f1f1f1; }\n  .filters #find {\n    background-color: #784754;\n    color: #e8e8e8; }\n\n.content .cafes article {\n  background-color: #f1f1f1;\n  border: 5px solid #e8e8e8; }\n  .content .cafes article .cafe-name {\n    color: #555555; }\n  .content .cafes article .cafe-address {\n    color: #aaaaaa; }\n\nfooter {\n  color: #ad2c2c; }\n\n.invisible {\n  display: flex;\n  /*na flex*/\n  position: fixed;\n  justify-content: center;\n  align-items: center;\n  z-index: 4;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  padding: 10px;\n  background-color: rgba(241, 241, 241, 0.7); }\n  .invisible .banner {\n    width: 30vw;\n    height: 30vh;\n    border-radius: 3px;\n    border: 1px solid #784754;\n    background-color: rgba(120, 71, 84, 0.8);\n    display: flex;\n    justify-content: center;\n    align-items: center; }\n    .invisible .banner p {\n      font-size: 120%;\n      font-weight: 300;\n      display: inline-block;\n      width: 80%;\n      text-align: left;\n      color: #ffb752; }\n\nheader .title {\n  font-size: 20px;\n  text-transform: uppercase; }\n  header .title span:last-child {\n    font-weight: bold; }\n\n.filters {\n  text-transform: uppercase; }\n  .filters #where {\n    font-size: 14px;\n    text-transform: uppercase;\n    border: 0; }\n    .filters #where:focus {\n      outline-style: none;\n      border: 0; }\n  .filters #find {\n    font-size: 30px;\n    border: 0; }\n\n.content .cafes article {\n  font-size: 14px;\n  height: 8em;\n  border-radius: 2px;\n  line-height: 1.2em; }\n  .content .cafes article .cafe-hours {\n    margin-top: 0.3em;\n    width: 100%;\n    height: 1.5em;\n    border-radius: 3px;\n    background-color: #ffb752;\n    position: relative;\n    color: #555555; }\n    .content .cafes article .cafe-hours .hour {\n      width: 1px;\n      height: 100%;\n      background-color: #784754;\n      position: absolute;\n      z-index: 2; }\n    .content .cafes article .cafe-hours .cafe-hours-from {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #ffb752;\n      position: absolute;\n      display: flex;\n      z-index: 2; }\n      .content .cafes article .cafe-hours .cafe-hours-from span {\n        position: absolute;\n        right: -28px;\n        font-size: 10px;\n        text-align: right;\n        padding-right: 2px; }\n      .content .cafes article .cafe-hours .cafe-hours-from .closed {\n        justify-content: center;\n        text-align: center; }\n    .content .cafes article .cafe-hours .cafe-hours-to {\n      padding-top: 0.2em;\n      margin-left: 5%;\n      margin-right: 5%;\n      height: 100%;\n      background-color: #e8e8e8;\n      position: absolute;\n      z-index: 1;\n      display: flex;\n      justify-content: flex-end; }\n      .content .cafes article .cafe-hours .cafe-hours-to span {\n        font-size: 10px;\n        padding-right: 2px; }\n  .content .cafes article .cafe-icons {\n    display: flex;\n    align-items: center;\n    padding: 0.2em; }\n    .content .cafes article .cafe-icons img {\n      width: 1.8em;\n      height: 1.8em;\n      padding: 0.2em; }\n", ""]);
 
 // exports
 
@@ -18104,40 +18104,49 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var moduleSetCafesInfo = function (allCafes) {
 
   var setHourAndMinutes = function setHourAndMinutes(when, elem, myWidth) {
+    var whenRound = void 0; // hours in decimal system
+
     if (when.length === 1 || when.length === 2) {
+      // case: opening hours without minutes
       $(elem).css("width", (parseInt(myWidth, 10) - 6) * 5 + "%");
       $(elem).html("<span>" + when + " <sup>00</sup> </span>");
     } else {
+      // case: opening hours with minutes
       var min = void 0;
       if (when.length === 4) {
         // case 1-digit hour
         min = when[2] + when[3]; //return string made of 2 numbers e.g. from[2]=3, from[3]=0 -> min=30
+        whenRound = parseInt(when, 10) + parseInt(min, 10) / 60;
       } else if (when.length === 5) {
         // case 2-digits hour
         min = when[3] + when[4];
+        whenRound = parseInt(when, 10) + parseInt(min, 10) / 60;
       }
-      $(elem).css("width", (parseInt(when, 10) - 6) * 5 + "%"); // parse only 1st number e.g. 7:30 -> 7
-      $(elem).html("<span>" + parseInt(when, 10) + "<sup>" + min + "</sup></span>");
+      // formula for setting stripe width : ( when - 6 )*5
+      // total width of stripe .cafe-fours is 100% - it is split to 20 parts - 5% is 1 hour - starts from 5am - ends at 1am, 5% is for margins from left and right - so actual start hour is 6am and end - midnight
+      //exmaple : when=9 , 9-6=3 , 3*5% = 15% - the .cafe-hours-from stripe has 15%width (+5% margins)
+
+      $(elem).css("width", (whenRound - 6) * 5 + "%");
+      $(elem).html("<span>" + parseInt(when, 10) + "<sup>" + min + "</sup></span>"); // parse only 1st number e.g. 7:30 -> 7
     }
   };
 
   var _setCafeInfo = function _setCafeInfo(allCafes) {
 
+    // set cafe name
     $(".cafe-name").each(function (i, elem) {
-      // find elements with class cafe-name
       $(elem).text(allCafes[i][1].name);
     });
+    // set cafe address
     $(".cafe-name").each(function (i, elem) {
-      // find elements with class cafe-name
       $(elem).next().text(allCafes[i][1].adress);
     });
 
-    // here - changing hours
+    // set opening hours (width of stripe + text)
     $(".cafe-hours-from").each(function (i, elem) {
-      // find elements with class cafe-hours-from
 
       if ((0, _hours2.default)(allCafes[i]).from === "") {
-        // if this day cafe is closed
+        // if today is closed
 
         $(elem).html("<span class=\"closed\">ZAMKNI\u0118TE</span>");
         $(elem).css("width", "50%");
@@ -18145,13 +18154,12 @@ var moduleSetCafesInfo = function (allCafes) {
         // if it is open
 
         var from = (0, _hours2.default)(allCafes[i]).from; // 2 type of data in base -> "8" or "7:30"
-
         setHourAndMinutes(from, elem, from);
       }
     });
 
+    //set close hours (width of stripe + text)
     $(".cafe-hours-to").each(function (i, elem) {
-      // find elements with class cafe-hours-to
 
       if ((0, _hours2.default)(allCafes[i]).to === "") {
         // if cafe is closed
@@ -18162,7 +18170,6 @@ var moduleSetCafesInfo = function (allCafes) {
         // if cafe is open
 
         var to = (0, _hours2.default)(allCafes[i]).to;
-
         if (parseInt(to, 10) < 16) {
           // case: cafe is open till late hours - e.g. 2 am
 
@@ -18175,29 +18182,48 @@ var moduleSetCafesInfo = function (allCafes) {
       }
     });
 
-    var icons = ["slice1.png", "slice2.png", "slice3.png", "slice4.png", "slice5.png"];
+    // set actual time on .cafe-hours stripe --> in scss class .hour
+    $(".cafe-hours").each(function (i, elem) {
 
+      var min = new Date().getMinutes(); // actual time - min
+      var hour = new Date().getHours(); // actual time - hour
+
+      var time = Math.round((hour + min / 60) * 1000) / 1000;
+      //example: hours=8 , min=30 -> time = 8.5 , *1000/1000 - 3 decimal  round
+
+      if (time >= 5 && time <= 24) {
+        // show time only form 5 to 24
+        $(elem).append("<div class=\"hour\" style=\"left: " + ((time - 6) * 5 + 5) + "%\">  </div>");
+      }
+    });
+
+    // set description (icons)
     $(".cafe-icons").each(function (i, elem) {
-      //
+
+      //all icons
+      var icons = ["slice1.png", "slice2.png", "slice3.png", "slice4.png", "slice5.png"];
+      var path = "./img/icons/";
+
+      // get description from datebase
       var cafeIcons = allCafes[i][1].icons().split(" ");
       $(elem).html("");
       $(cafeIcons).each(function (i, ico) {
 
         switch (ico) {
           case "[a]":
-            $(elem).append("<img class=\"" + ico + "\" src=\"./img/icons/" + icons[0] + "\" alt=\"" + ico + "\">");
+            $(elem).append("<img class=\"" + ico + "\" src=\"" + (path + icons[0]) + "\" alt=\"" + ico + "\">");
             break;
           case "[e]":
-            $(elem).append("<img src='./img/icons/" + icons[1] + "'>");
+            $(elem).append("<img src='" + (path + icons[1]) + "' alt=\"" + ico + "\">");
             break;
           case "[fresh]":
-            $(elem).append("<img src='./img/icons/" + icons[2] + "'>");
+            $(elem).append("<img src='" + (path + icons[2]) + "' alt=\"" + ico + "\">");
             break;
           case "[100%]":
-            $(elem).append("<img src='./img/icons/" + icons[3] + "'>");
+            $(elem).append("<img src='" + (path + icons[3]) + "' alt=\"" + ico + "\">");
             break;
           case "[lokal]":
-            $(elem).append("<img src='./img/icons/" + icons[4] + "'>");
+            $(elem).append("<img src='" + (path + icons[4]) + "' alt=\"" + ico + "\">");
             break;
         }
       });

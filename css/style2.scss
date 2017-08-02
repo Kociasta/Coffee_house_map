@@ -63,6 +63,14 @@ header {
         position: relative;
         color: $color-text-darkGrey;
 
+        .hour {
+          width: 1px;
+          height: 100%;
+          background-color: $color-button;
+          position: absolute;
+          z-index:2;
+        }
+
 
         .cafe-hours-from {
           padding-top: 0.2em;
