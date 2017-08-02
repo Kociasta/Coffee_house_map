@@ -11866,7 +11866,7 @@ var second = function () {
 
             markersCafes = []; // positions of cafes
 
-            // onGeocoded() -> 1. make marker of my position 2.sort cafes in distatnce order 3. set cafes info 4. make markers of cafes
+            // onGeocoded() -> 1. make marker of my position 2.sort cafes in distatnce order 3. set cafes info 4. make markers of cafes 5. delete last elems of cafes
 
             //EVENTS
             if ($(".invisible").css("display") === "flex") {
