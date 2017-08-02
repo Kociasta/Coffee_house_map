@@ -1,5 +1,5 @@
 // file with all code / logics
-import './../css/style2.scss';
+import './../css/style.scss';
 import moduleFirebase from './fb.js';
 import moduleDistance from './distance.js';
 import moduleInitMap from './initMap.js';
@@ -32,7 +32,7 @@ import moduleCafeMarker from './cafeMarker.js';
       let markersMy = [];
       let markersCafes = [];
       let infowindow = new google.maps.InfoWindow();
-    
+
       function findCafes() {
         allCafes = null; // it could not be here
         moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
