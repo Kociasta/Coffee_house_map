@@ -13,8 +13,8 @@
   background-color: rgba($color-main-grey , 0.7);
 
   .banner {
-    width: 30vw;
-    height: 30vh;
+    width: 70vw;
+    height: 50vh;
     border-radius: 3px;
     border: 1px solid $color-button;
     background-color: rgba($color-button, 0.8);
@@ -31,4 +31,18 @@
       color: $color-main-yellow;
     }
   }
+}
+
+@media screen and (min-width: 600px) {
+
+  .invisible{
+
+    .banner {
+      width: 30vw;
+      height: 30vh;
+    }
+
+  }
+
+
 }

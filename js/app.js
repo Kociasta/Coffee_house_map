@@ -79,11 +79,11 @@ import moduleCafeMarker from './cafeMarker.js';
       }
 
       //EVENTS
+      //............................................intro 
       if( $(".invisible").css("display") === "flex" ){
         $('html').on("keyup" , (event) => {
           if(event.keyCode == enter ){
             $(".invisible").css("display" , "none");
-
           }
         });
 
