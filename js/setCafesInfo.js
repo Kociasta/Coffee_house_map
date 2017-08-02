@@ -94,41 +94,42 @@ let moduleSetCafesInfo = (function(allCafes) {
 
 
     // set description (icons)
-    $(".cafe-icons").each((i , elem) => {
+    $(".cafe-icons").each((i , iconStripe) => {
 
       //all icons
       let icons = ["slice1.png","slice2.png","slice3.png","slice4.png","slice5.png"];
       let path = "./img/icons/";
-      
+
       // get description from datebase
       let cafeIcons = allCafes[i][1].icons().split(" ");
-      $(elem).html("");
-      $(cafeIcons).each((i , ico)=>{
+      // clearing icon stripe
+      $(iconStripe).html("");
 
+      // running through array cafeIcons and checking what icons set
+      $(cafeIcons).each((index , ico)=>{
         switch(ico) {
           case "[a]":
-            $(elem).append(`<img class="${ico}" src="${path+icons[0]}" alt="${ico}">`);
+            $(iconStripe).append(`<img class="${ico}" src="${path+icons[0]}" alt="${ico}">`);
             break;
           case "[e]":
-            $(elem).append(`<img src='${path+icons[1]}' alt="${ico}">`);
+            $(iconStripe).append(`<img src='${path+icons[1]}' alt="${ico}">`);
             break;
           case "[fresh]":
-            $(elem).append(`<img src='${path+icons[2]}' alt="${ico}">`);
+            $(iconStripe).append(`<img src='${path+icons[2]}' alt="${ico}">`);
             break;
           case "[100%]":
-            $(elem).append(`<img src='${path+icons[3]}' alt="${ico}">`);
+            $(iconStripe).append(`<img src='${path+icons[3]}' alt="${ico}">`);
             break;
           case "[lokal]":
-            $(elem).append(`<img src='${path+icons[4]}' alt="${ico}">`);
+            $(iconStripe).append(`<img src='${path+icons[4]}' alt="${ico}">`);
             break;
         }
       });
-
-
-
     });
 
-  }
+
+
+  } //_setCafeInfo()
 
 
 

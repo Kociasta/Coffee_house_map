@@ -32,17 +32,7 @@ import moduleCafeMarker from './cafeMarker.js';
       let markersMy = [];
       let markersCafes = [];
       let infowindow = new google.maps.InfoWindow();
-      //
-      // function onLoad() {
-      //
-      //   let _all = moduleFirebase.coffeeAddress();
-      //   // console.log(_allCafes);
-      //   for(let i = 0 ; i<4 ; i++){
-      //     markersMy.push(moduleCafeMarker.setCafeMarker(_all[i][0] , map , _all[i][1].name() ));
-      //   }
-      //   console.log(markersMy);
-      // }
-
+    
       function findCafes() {
         allCafes = null; // it could not be here
         moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
@@ -74,15 +64,6 @@ import moduleCafeMarker from './cafeMarker.js';
         // make MARKERS of nearest Cafes
         for(let i = 0 ; i<4 ; i++){
           markersCafes.push(moduleCafeMarker.setCafeMarker(allCafes[i][0] , map , allCafes[i][1].name() ) );
-
-          // markersCafes[i].addListener('mouseover', function() {
-    	    //     infowindow.setContent(markersCafes[i].title);
-          //     infowindow.open(map, markersCafes[i]);
-          // });
-          // markersCafes[i].addListener('mouseout', function() {
-          //   infowindow.close(map, markersCafes[i]);
-          // });
-
         }
 
         //delete last elem of each cafe - which is counted distance
@@ -117,10 +98,6 @@ import moduleCafeMarker from './cafeMarker.js';
       $('#find').on('click' , (event) => {
         findCafes();
       });
-
-      // $('.title').on('click' , (event) => {
-      //   onLoad();
-      // });
 
       $('article').on("click" , function(event){
         event.preventDefault();

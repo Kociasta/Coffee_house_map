@@ -11825,14 +11825,6 @@ var second = function () {
               // make MARKERS of nearest Cafes
               for (var i = 0; i < 4; i++) {
                 markersCafes.push(_cafeMarker2.default.setCafeMarker(allCafes[i][0], map, allCafes[i][1].name()));
-
-                // markersCafes[i].addListener('mouseover', function() {
-                //     infowindow.setContent(markersCafes[i].title);
-                //     infowindow.open(map, markersCafes[i]);
-                // });
-                // markersCafes[i].addListener('mouseout', function() {
-                //   infowindow.close(map, markersCafes[i]);
-                // });
               }
 
               //delete last elem of each cafe - which is counted distance
@@ -11867,16 +11859,7 @@ var second = function () {
             markersMy = [];
             markersCafes = [];
             infowindow = new google.maps.InfoWindow();
-            //
-            // function onLoad() {
-            //
-            //   let _all = moduleFirebase.coffeeAddress();
-            //   // console.log(_allCafes);
-            //   for(let i = 0 ; i<4 ; i++){
-            //     markersMy.push(moduleCafeMarker.setCafeMarker(_all[i][0] , map , _all[i][1].name() ));
-            //   }
-            //   console.log(markersMy);
-            // }
+
 
             //EVENTS
             if ($(".invisible").css("display") === "flex") {
@@ -11902,10 +11885,6 @@ var second = function () {
             $('#find').on('click', function (event) {
               findCafes();
             });
-
-            // $('.title').on('click' , (event) => {
-            //   onLoad();
-            // });
 
             $('article').on("click", function (event) {
               event.preventDefault();
@@ -18198,7 +18177,7 @@ var moduleSetCafesInfo = function (allCafes) {
     });
 
     // set description (icons)
-    $(".cafe-icons").each(function (i, elem) {
+    $(".cafe-icons").each(function (i, iconStripe) {
 
       //all icons
       var icons = ["slice1.png", "slice2.png", "slice3.png", "slice4.png", "slice5.png"];
@@ -18206,29 +18185,32 @@ var moduleSetCafesInfo = function (allCafes) {
 
       // get description from datebase
       var cafeIcons = allCafes[i][1].icons().split(" ");
-      $(elem).html("");
-      $(cafeIcons).each(function (i, ico) {
+      // clearing icon stripe
+      $(iconStripe).html("");
 
+      // running through array cafeIcons and checking what icons set
+      $(cafeIcons).each(function (index, ico) {
         switch (ico) {
           case "[a]":
-            $(elem).append("<img class=\"" + ico + "\" src=\"" + (path + icons[0]) + "\" alt=\"" + ico + "\">");
+            $(iconStripe).append("<img class=\"" + ico + "\" src=\"" + (path + icons[0]) + "\" alt=\"" + ico + "\">");
             break;
           case "[e]":
-            $(elem).append("<img src='" + (path + icons[1]) + "' alt=\"" + ico + "\">");
+            $(iconStripe).append("<img src='" + (path + icons[1]) + "' alt=\"" + ico + "\">");
             break;
           case "[fresh]":
-            $(elem).append("<img src='" + (path + icons[2]) + "' alt=\"" + ico + "\">");
+            $(iconStripe).append("<img src='" + (path + icons[2]) + "' alt=\"" + ico + "\">");
             break;
           case "[100%]":
-            $(elem).append("<img src='" + (path + icons[3]) + "' alt=\"" + ico + "\">");
+            $(iconStripe).append("<img src='" + (path + icons[3]) + "' alt=\"" + ico + "\">");
             break;
           case "[lokal]":
-            $(elem).append("<img src='" + (path + icons[4]) + "' alt=\"" + ico + "\">");
+            $(iconStripe).append("<img src='" + (path + icons[4]) + "' alt=\"" + ico + "\">");
             break;
         }
       });
     });
-  };
+  }; //_setCafeInfo()
+
 
   return {
     setCafesInfo: _setCafeInfo
