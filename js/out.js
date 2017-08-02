@@ -17947,33 +17947,34 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
+//******************************************************************************
 var moduleInitMap = function () {
-  var mapId = $('#map')[0]; // jQuery: return Object - I have to pull out div elem
+
+  var _mapId = $('#map')[0]; // jQuery: return Object - I have to pull out div elem
   var _map = void 0;
   var _geocoder = void 0;
 
   var _initMap = function _initMap() {
     var centrum = { lat: 52.229676, lng: 21.012229 }; //my focus on start point
-    _map = new google.maps.Map(mapId, { //create new map elem in #map
-      zoom: 13,
+    _map = new google.maps.Map(_mapId, { //create new map elem in #map
+      zoom: 14,
       center: centrum
     });
     _geocoder = new google.maps.Geocoder();
   };
 
-  var makeMap = function makeMap() {
+  var _makeMap = function _makeMap() {
     return _map;
   };
 
-  var makeGeocoder = function makeGeocoder() {
+  var _makeGeocoder = function _makeGeocoder() {
     return _geocoder;
   };
 
   return {
     initMap: _initMap,
-    map: makeMap,
-    geocoder: makeGeocoder
+    map: _makeMap,
+    geocoder: _makeGeocoder
   };
 }();
 

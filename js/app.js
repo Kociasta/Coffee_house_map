@@ -8,6 +8,7 @@ import moduleSortCafes from './sortCafes.js';
 import moduleSetCafesInfo from './setCafesInfo.js';
 import moduleMyMarker from './myMarker.js';
 import moduleCafeMarker from './cafeMarker.js';
+
     const enter = 13;
     // initialize variables
     let map ;
