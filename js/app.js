@@ -27,13 +27,13 @@ import moduleCafeMarker from './cafeMarker.js';
     async function second() {
       await first();
 
-      let allCafes;
+      let sortedAllCafes; // sorted usable database
 
       let markersMy = []; // my position
       let markersCafes = []; // positions of cafes
 
       function findCafes() {
-        allCafes = null; // it could not be here
+        sortedAllCafes = null; // it could not be here
         moduleGeocodeMyAddress.geocodeAddress(geocoder , map , $('#where').val() , onGeocoded);
         // clearing input value
         $('#where').val(" ") ;
@@ -50,23 +50,25 @@ import moduleCafeMarker from './cafeMarker.js';
         markersCafes.splice(0,4);
       }
 
+      // onGeocoded() -> 1. make marker of my position 2.sort cafes in distatnce order 3. set cafes info 4. make markers of cafes
+
       function onGeocoded(resultLatLng) {
         // make MARKER of my searching address
         let myPositionMarker = moduleMyMarker.setMyMarker(resultLatLng , map);
         markersMy.push(myPositionMarker);
 
         // sorting data in distance order
-        allCafes = moduleSortCafes.allCafes(resultLatLng);
+        sortedAllCafes = moduleSortCafes.sortedAllCafes(resultLatLng);
         // setting Name i Address in HTML (nearest)
-        moduleSetCafesInfo.setCafesInfo(allCafes);
+        moduleSetCafesInfo.setCafesInfo(sortedAllCafes);
 
         // make MARKERS of nearest Cafes
         for(let i = 0 ; i<4 ; i++){
-          markersCafes.push(moduleCafeMarker.setCafeMarker(allCafes[i][0] , map , allCafes[i][1].name() ) );
+          markersCafes.push(moduleCafeMarker.setCafeMarker(sortedAllCafes[i][0] , map , sortedAllCafes[i][1].name() ) );
         }
 
         //delete last elem of each cafe - which is counted distance
-        allCafes.forEach((elem , i) => {
+        sortedAllCafes.forEach((elem , i) => {
             elem.splice(-1,1);
         });
 

@@ -11808,7 +11808,7 @@ var first = function () {
 
 var second = function () {
   var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
-    var allCafes, markersMy, markersCafes, findCafes, onGeocoded;
+    var sortedAllCafes, markersMy, markersCafes, findCafes, onGeocoded;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -11819,23 +11819,23 @@ var second = function () {
               markersMy.push(myPositionMarker);
 
               // sorting data in distance order
-              allCafes = _sortCafes2.default.allCafes(resultLatLng);
+              sortedAllCafes = _sortCafes2.default.sortedAllCafes(resultLatLng);
               // setting Name i Address in HTML (nearest)
-              _setCafesInfo2.default.setCafesInfo(allCafes);
+              _setCafesInfo2.default.setCafesInfo(sortedAllCafes);
 
               // make MARKERS of nearest Cafes
               for (var i = 0; i < 4; i++) {
-                markersCafes.push(_cafeMarker2.default.setCafeMarker(allCafes[i][0], map, allCafes[i][1].name()));
+                markersCafes.push(_cafeMarker2.default.setCafeMarker(sortedAllCafes[i][0], map, sortedAllCafes[i][1].name()));
               }
 
               //delete last elem of each cafe - which is counted distance
-              allCafes.forEach(function (elem, i) {
+              sortedAllCafes.forEach(function (elem, i) {
                 elem.splice(-1, 1);
               });
             };
 
             findCafes = function findCafes() {
-              allCafes = null; // it could not be here
+              sortedAllCafes = null; // it could not be here
               _geocodeMyAddress2.default.geocodeAddress(geocoder, map, $('#where').val(), onGeocoded);
               // clearing input value
               $('#where').val(" ");
@@ -11856,10 +11856,13 @@ var second = function () {
             return first();
 
           case 4:
-            allCafes = void 0;
+            sortedAllCafes = void 0; // sorted usable database
+
             markersMy = []; // my position
 
             markersCafes = []; // positions of cafes
+
+            // onGeocoded() -> 1. make marker of my position 2.sort cafes in distatnce order 3. set cafes info 4. make markers of cafes
 
             //EVENTS
             if ($(".invisible").css("display") === "flex") {
@@ -18045,26 +18048,29 @@ var _fb2 = _interopRequireDefault(_fb);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//*****************************************************************************
 var moduleSortCafes = function (resultLatLng) {
 
+  // all important info from database
   var _allCafes = _fb2.default.coffeeDB();
 
-  var takeAllCafes = function takeAllCafes(resultLatLng) {
+  // return SORTED database
+  var _takeAllCafes = function _takeAllCafes(resultLatLng) {
 
+    // push distance as third element of _allCafes
     _allCafes.forEach(function (elem, i) {
       _allCafes[i].push(_distance2.default.takeDistance(resultLatLng, elem[0]));
     });
-
+    // sort array
     _allCafes.sort(function (a, b) {
       return a[2] - b[2];
-    }); // sort order - 3rd elem - distance
-
+    }); // sort order -[2]- 3rd elem - distance
 
     return _allCafes;
   };
 
   return {
-    allCafes: takeAllCafes
+    sortedAllCafes: _takeAllCafes
   };
 }();
 
