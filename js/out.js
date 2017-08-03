@@ -18192,7 +18192,7 @@ var moduleSetCafesInfo = function (allCafes) {
 
       if (time >= 5 && time <= 24) {
         // show time only form 5 to 24
-        $(elem).append("<div class=\"hour\" style=\"left: " + ((time - 6) * 5 + 5) + "%\">  </div>");
+        $(elem).find(".hour").css("left", (time - 6) * 5 + 5 + "%");
       }
     });
 
