@@ -1,5 +1,5 @@
 // file with all code / logics
-import './../css/style.scss';
+// import './../css/style.scss';
 import moduleFirebase from './fb.js';
 import moduleDistance from './distance.js';
 import moduleInitMap from './initMap.js';
@@ -79,7 +79,7 @@ import moduleCafeMarker from './cafeMarker.js';
       }
 
       //EVENTS
-      //............................................intro 
+      //............................................intro
       if( $(".invisible").css("display") === "flex" ){
         $('html').on("keyup" , (event) => {
           if(event.keyCode == enter ){

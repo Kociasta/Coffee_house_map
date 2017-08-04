@@ -2,3 +2,4 @@ node_modules/
 problems.txt
 baza/
 backup.js
+gulpfile.js
