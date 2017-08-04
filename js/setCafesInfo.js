@@ -12,10 +12,10 @@ let moduleSetCafesInfo = (function(allCafes) {
       let min;
       if(when.length === 4){ // case 1-digit hour
         min = when[2] + when[3]; //return string made of 2 numbers e.g. from[2]=3, from[3]=0 -> min=30
-        whenRound = parseInt(when,10)+ parseInt((min),10)/60;
+        whenRound = parseInt(myWidth,10)+ parseInt((min),10)/60;
       } else if(when.length === 5) { // case 2-digits hour
         min = when[3] + when[4];
-        whenRound = parseInt(when,10)+ parseInt((min),10)/60;
+        whenRound = parseInt(myWidth,10)+ parseInt((min),10)/60;
       }
       // formula for setting stripe width : ( when - 6 )*5
       // total width of stripe .cafe-fours is 100% - it is split to 20 parts - 5% is 1 hour - starts from 5am - ends at 1am, 5% is for margins from left and right - so actual start hour is 6am and end - midnight
@@ -66,7 +66,7 @@ let moduleSetCafesInfo = (function(allCafes) {
         let to = getHours(allCafes[i]).to;
         if(parseInt(to,10) < 16) { // case: cafe is open till late hours - e.g. 2 am
 
-          setHourAndMinutes(to , elem , 24);
+          setHourAndMinutes( to , elem , 24);
 
         } else{ // case: cafe is open "normal" and closed before mid.
 
